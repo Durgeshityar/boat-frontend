@@ -67,7 +67,7 @@ export default function Landing({ onSubmit }: LandingProps) {
             <p className="text-white/80 text-md font-light text-center leading-relaxed max-w-3xl">
               Real habits. Real data. A real glimpse
               <br />
-              into what's next.
+              into what&#39;s next.
             </p>
           </div>
 
@@ -130,8 +130,8 @@ export default function Landing({ onSubmit }: LandingProps) {
 
           <section className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto text-center text-white">
             <p className="mb-6 font-normal tracking-tight leading-relaxed text-xl">
-              "I didn't expect sleep and screen time to impact my future this
-              much."
+              &#34;I didn&#39;t expect sleep and screen time to impact my future this
+              much.&#34;
             </p>
             <div className="flex flex-col items-center gap-2">
               <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">

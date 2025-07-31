@@ -30,7 +30,7 @@ export default function Step4() {
       setFactIndex((prev) => (prev + 1) % facts.length);
     }, 4000);
     return () => clearInterval(factInterval);
-  }, []);
+  }, [facts.length]);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col">

@@ -128,7 +128,7 @@ export default function Step3({
             <p className="text-white/60 text-center text-md font-light">
               These daily choices shape your tomorrow —
               <br />
-              let's map them out.
+              let&#39;s map them out.
             </p>
           </div>
 

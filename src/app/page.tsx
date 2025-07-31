@@ -11,7 +11,6 @@ import Step5 from "@/components/Step5";
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
   const [userName, setUserName] = useState("");
-  const [userPhoto, setUserPhoto] = useState<string | null>(null);
   const [userDetails, setUserDetails] = useState({
     dateOfBirth: "",
     height: 178,
@@ -34,7 +33,6 @@ export default function Home() {
   };
 
   const handlePhotoUpload = (photo: string) => {
-    setUserPhoto(photo);
     nextStep();
   };
 
@@ -58,7 +56,7 @@ export default function Home() {
     }, 8000);
     return () => clearTimeout(timer);
   }
-}, [currentStep]);
+}, [currentStep, nextStep]);
 
   const renderStep = () => {
     switch (currentStep) {
@@ -87,8 +85,6 @@ export default function Home() {
       case 5:
         return (
           <Step5
-            userName={userName}
-            userPhoto={userPhoto}
             userDetails={userDetails}
             dailyActivity={dailyActivity}
           />

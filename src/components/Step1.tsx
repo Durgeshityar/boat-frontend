@@ -100,7 +100,7 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
         <div className="flex-1 flex flex-col items-center justify-start px-4 max-w-md mx-auto w-full">
           <div className="mb-8">
             <h2 className="text-2xl font-light text-white mb-3 text-left md:text-center">
-              Let's Get to Know You, {userName}
+              Let&#39;s Get to Know You, {userName}
             </h2>
             <p className="text-white/60 text-md font-light text-left md:text-center">
               A few quick questions to set the foundation. Just you and your
@@ -124,7 +124,7 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
               Ready for the Glow-Up?
             </h3>
             <p className="text-[#67787F] text-left text-sm font-light mb-7 md:text-center">
-              We'll generate a visual transformation based on your current
+              We&#39;ll generate a visual transformation based on your current
               inputs.
             </p>
             <div

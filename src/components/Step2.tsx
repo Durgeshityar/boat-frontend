@@ -127,10 +127,10 @@ export default function Step2({ userName, userDetails, onSubmit }: Step2Props) {
               }}
             >
               <label className="block text-lg text-[#F4F4F5] mb-2">
-                What's your date of birth?
+                What&#39;s your date of birth?
               </label>
               <p className="text-[#8C8C97] font-light text-sm mb-4">
-                We'll use this to measure your biological vs actual age.
+                We&#39;ll use this to measure your biological vs actual age.
               </p>
               <div className="relative">
                 <input

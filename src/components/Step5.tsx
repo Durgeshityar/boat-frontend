@@ -153,10 +153,10 @@ export default function Step5({ userDetails }: Step5Props) {
 
           <div className="text-center mb-10 px-2">
             <h2 className="text-[26px] font-light text-white mb-3">
-              This Is Where You're Headed
+              This Is Where You&#39;re Headed
             </h2>
             <p className="text-white/70 text-md font-light">
-              Based on your lifestyle today, here's what's possible in 1, 3 and
+              Based on your lifestyle today, here&#39;s what&#39;s possible in 1, 3 and
               5 years.
             </p>
           </div>
