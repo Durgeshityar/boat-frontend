@@ -68,8 +68,6 @@ export default function ProfileBadge({
         <div
           className="overflow-hidden rounded-full flex items-center justify-center bg-black/50"
           style={{
-            width: imageSize,
-            height: imageSize,
             filter: validPhoto ? "blur(4px)" : "none",
           }}
         >

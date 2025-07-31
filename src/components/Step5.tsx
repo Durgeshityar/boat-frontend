@@ -156,15 +156,15 @@ export default function Step5({ userDetails }: Step5Props) {
               This Is Where You&#39;re Headed
             </h2>
             <p className="text-white/70 text-md font-light">
-              Based on your lifestyle today, here&#39;s what&#39;s possible in 1, 3 and
-              5 years.
+              Based on your lifestyle today, here&#39;s what&#39;s possible in
+              1, 3 and 5 years.
             </p>
           </div>
 
           <div
             className="flex items-center justify-center mb-8 mt-2"
             style={{
-              width: 361,
+              width: "100%",
               height: 60,
               borderRadius: 56,
               gap: 8,
@@ -352,63 +352,74 @@ export default function Step5({ userDetails }: Step5Props) {
             ))}
           </div>
 
-          <div className="w-full h-full rounded-[24px] p-[40px_16px] gap-[24px] bg-[#FFFFFF12] border-[0.76px] border-[#FFFFFF80] shadow-[3.2px_6.6px_20.11px_9.6px_#A6D9F544,_-2.9px_-6.5px_20px_9.6px_#6A685633] backdrop-blur-[12px] opacity-100 flex flex-col items-center mb-8">
-            <h3 className="font-[Onest] font-light text-[26px] leading-[100%] tracking-[-0.04em] text-center capitalize bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text [text-shadow:0px_0px_20px_#FFFFFF66] mb-[24px]">
+          <div className="w-full rounded-[24px] px-2 py-8 bg-[#FFFFFF12] border border-[#FFFFFF80] shadow-[3.2px_6.6px_20.11px_9.6px_#A6D9F544,_-2.9px_-6.5px_20px_9.6px_#6A685633] backdrop-blur-[12px] flex flex-col items-center mb-8 mx-auto">
+            <h3 className="font-light text-[22px] tracking-[-0.04em] text-center capitalize bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text mb-6 sm:text-[26px]">
               Your Future Glow-Up
             </h3>
-            <div className="w-[228px] h-[228px] rounded-full border border-[#FFFFFF80] shadow-[2.5px_5px_13.5px_6px_#A6D9F544,_-2.1px_-4.6px_13.4px_6px_#6A685633] overflow-hidden bg-[#181A20] mb-[24px] opacity-100">
+            <div className="w-full max-w-[185px] aspect-square rounded-full mx-auto border border-[#FFFFFF80] shadow-[2.5px_5px_13.5px_6px_#A6D9F544,_-2.1px_-4.6px_13.4px_6px_#6A685633] overflow-hidden bg-[#181A20] mb-6">
               <img
                 src={userPhotoUrl}
                 alt="Future self"
                 className="w-full h-full object-cover object-center"
               />
             </div>
-            <div className="w-full h-[1px] bg-[#FFFFFF33] mb-[24px]" />
-
-            <div className="w-[329px] flex flex-col gap-[12px] mb-[32px]">
+            <div className="w-full h-[1px] bg-[#FFFFFF33] mb-6" />
+            <div className="w-full flex flex-col gap-3 px-1 mb-8">
               {metrics.map((metric, idx) => (
                 <div
                   key={idx}
-                  className="w-[329px] h-[56px] rounded-[8px] px-[24px] py-[16px] bg-[#FFFFFF0D] flex items-center"
+                  className="w-full h-14 rounded-[8px] px-4 py-3 bg-[#FFFFFF0D] flex items-center"
                 >
-                  <metric.icon className="w-[24px] h-[24px] text-white stroke-[1.5] mr-[14px]" />
-                  <span className="text-[#FFFFFFB2] font-light text-[15px] leading-[22px] mr-auto">
+                  <metric.icon className="w-6 h-6 text-white stroke-[1.5] mr-3" />
+                  <span className="text-[#FFFFFFB2] font-light text-[15px] mr-auto">
                     {metric.label}
                   </span>
-                  <span className="font-light text-[15px] leading-[22px] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text">
+                  <span className="font-light text-[15px] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text">
                     {metric.change}
                   </span>
                 </div>
               ))}
             </div>
-
-            <div className="w-[203px] h-[43px] rounded-[48px] px-[20px] py-[12px] bg-gradient-to-r from-[rgba(255,233,153,0.1)] to-[rgba(142,208,243,0.1)] border-[rgba(255,233,153,0.7)] border border-image-[linear-gradient(90deg,rgba(255,233,153,0.7)_0%,rgba(142,208,243,0.7)_100%)_1] flex items-center justify-center mb-[24px]">
+            <div className="w-full max-w-[203px] h-11 rounded-full px-5 py-2 bg-gradient-to-r from-[rgba(255,233,153,0.1)] to-[rgba(142,208,243,0.1)] border border-[rgba(255,233,153,0.7)] flex items-center justify-center mx-auto mb-8">
               <span className="font-normal text-[16px] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text">
                 #valour_transformation
               </span>
             </div>
+            <div className="w-full h-[1px] bg-[#FFFFFF33] mb-5" />
+           <h4 className="font-light text-[18px] text-center capitalize text-white mb-5 sm:text-[22px]">
+  Own It. Share It. Repeat It.
+</h4>
 
-            <div className="w-full h-[1px] bg-[#FFFFFF33] mb-[20px]" />
+<button
+  type="submit"
+  className={`mb-5 mx-auto relative z-10 w-full h-14 rounded-full font-medium text-md
+    flex items-center justify-center gap-2
+    shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)]
+    border-[3px] border-[#FFFFFF66]
+    bg-gradient-to-r from-[#FFE999] to-[#8ED0F3]
+    text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB]
+    transition-all duration-200
+    focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30
+    my-1
+  `}
+  style={{ backdropFilter: "blur(36px)" }}
+>
+  <span aria-hidden className="flex">
+    <img src="/share.svg" alt="" aria-hidden />
+  </span>
+  Share your results
+</button>
 
-            <h4 className="font-[Onest] font-light text-[22px] leading-[100%] tracking-[-0.04em] text-center capitalize text-white mb-[21px]">
-              Own It. Share It. Repeat It.
-            </h4>
+<div className="w-full flex gap-3 mb-5">
+  <button className="flex-[0.8] h-12 rounded-[40px] px-4 py-3 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white font-light text-[15px] flex items-center justify-center">
+    Copy link
+    <Copy className="w-5 h-5 ml-2" />
+  </button>
+  <button className="flex-[0.2] h-12 rounded-[40px] px-4 py-3 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white flex items-center justify-center">
+    <Download className="w-5 h-5" />
+  </button>
+</div>
 
-            <div className="w-full mb-[17px]">
-              <CtaButton>
-                <Share className="w-[20px] h-[20px] mr-[8px]" />
-                Share your results
-              </CtaButton>
-            </div>
-            <div className="w-[329px] flex gap-[13px]">
-              <button className="w-[227px] h-[48px] rounded-[40px] px-[29px] py-[16px] bg-[#FFFFFF0D] border-[#FFFFFF1A] border-[1.5px] text-white font-[Onest] font-light text-[15px] leading-[100%] tracking-[0] flex items-center justify-center mr-[8px]">
-                Copy link
-                <Copy className="w-[18px] h-[18px] ml-[8px]" />
-              </button>
-              <button className="w-[94px] h-[48px] rounded-[40px] px-[29px] py-[16px] bg-[#FFFFFF0D] border-[#FFFFFF1A] border-[1.5px] text-white flex items-center justify-center">
-                <Download className="w-[18px] h-[18px]" />
-              </button>
-            </div>
           </div>
         </main>
         <Footer />

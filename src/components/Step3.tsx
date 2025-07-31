@@ -110,7 +110,7 @@ export default function Step3({
       <div className="relative z-30 flex flex-col min-h-screen">
         <Header />
         <Stepper currentStep={3} />
-        <main className="flex-1 flex flex-col items-center justify-start px-4 max-w-xl mx-auto w-full">
+        <main className="flex-1 flex flex-col items-center justify-start px-4 max-w-xl mx-auto w-full mb-16">
           <div className="mb-8 w-full">
             <div className="flex items-center justify-center gap-4 mb-4">
               <ProfileBadge
@@ -153,7 +153,7 @@ export default function Step3({
             />
 
             <SliderCard
-              title="What's your daily water intake? (in ml)"
+              title="What's your daily water intake?"
               description="How many glasses of water do you drink daily on average?"
               min={0}
               max={3000}

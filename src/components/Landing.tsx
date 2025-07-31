@@ -128,18 +128,18 @@ export default function Landing({ onSubmit }: LandingProps) {
             aria-hidden="true"
           />
 
-          <section className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto text-center text-white">
+          <section className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto text-center text-white mb-10">
             <p className="mb-6 font-normal tracking-tight leading-relaxed text-xl">
               &#34;I didn&#39;t expect sleep and screen time to impact my future this
               much.&#34;
             </p>
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-0">
               <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
                 <span className="text-white font-semibold text-sm select-none">
                   JB
                 </span>
               </div>
-              <p className="text-white font-normal text-base m-0">Josh Bull</p>
+              <p className="text-white font-normal text-base mt-1">Josh Bull</p>
               <p className="text-[#FFFFFF99] text-sm m-0">Fitness enthusiast</p>
             </div>
           </section>

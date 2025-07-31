@@ -1,7 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@layer utilities {
+  .dark * {
+    color-scheme: dark;
+  }
+}
 
 body {
   font-family: var(--font-onest), sans-serif;
@@ -78,7 +82,7 @@ body {
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -119,11 +123,13 @@ body {
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--color-border);
+    outline-color: color-mix(in oklch, var(--color-ring) 50%, transparent);
     transition: all 0.2s ease-in-out;
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 }
 

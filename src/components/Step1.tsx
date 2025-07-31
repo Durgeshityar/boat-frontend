@@ -24,7 +24,6 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
         const result = e.target.result as string;
         setPhotoData(result);
         setShowValidation(false);
-        onPhotoUpload(result);
       }
     };
     reader.readAsDataURL(file);
@@ -50,6 +49,7 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
     if (!photoData) {
       setShowValidation(true);
     } else {
+      onPhotoUpload(photoData);
       setShowValidation(false);
     }
   };
@@ -143,36 +143,52 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
               }}
             >
               <div className="flex flex-col items-center">
-                <div className="w-20 h-20 bg-[#F5F5F51A] rounded-3xl flex items-center justify-center mb-4">
+                {photoData ? (
+                   <div className="w-20 h-20 bg-[#F5F5F51A] rounded-3xl flex items-center justify-center">
+                    
                   <img
-                    src="/upload-cloud.svg"
-                    alt="Upload icon"
-                    className="w-8 h-7"
+                    src={photoData}
+                    alt="Preview"
+                    className="w-auto object-cover rounded-xl z-30"
                   />
-                </div>
-                <p className="text-white mb-2 text-md">
-                  Drop your photo here or
-                  <br />
-                  tap to upload
-                </p>
-                <p className="text-[#FFFFFF80] text-sm mt-2">
-                  JPEG, PNG or GIF — max 800×800px
-                </p>
-                <label
-                  htmlFor="file-upload"
-                  className="absolute inset-0 w-full h-full cursor-pointer bg-[#FFFFFF0D] rounded-2xl"
-                  style={{
-                    backdropFilter: "blur(27px)",
-                  }}
-                >
-                  <input
-                    id="file-upload"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileSelect}
-                    className="hidden"
-                  />
-                </label>
+                  </div>  
+                ) : (
+                  <>
+                    <div className="w-20 h-20 bg-[#FFFFFF0D] rounded-3xl flex items-center justify-center mb-4"
+                     style={{
+                        backdropFilter: "blur(27px)",
+                      }}>
+                      <img
+                        src="/upload-cloud.svg"
+                        alt="Upload icon"
+                        className="w-8 h-7"
+                      />
+                    </div>
+                    <p className="text-white mb-2 text-md">
+                      Drop your photo here or
+                      <br />
+                      tap to upload
+                    </p>
+                    <p className="text-[#FFFFFF80] text-sm mt-2">
+                      JPEG, PNG or GIF — max 800×800px
+                    </p>
+                    <label
+                      htmlFor="file-upload"
+                      className="absolute inset-0 w-full h-full cursor-pointer bg-[#FFFFFF0D] rounded-2xl"
+                      style={{
+                        backdropFilter: "blur(27px)",
+                      }}
+                    >
+                      <input
+                        id="file-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileSelect}
+                        className="hidden"
+                      />
+                    </label>
+                  </>
+                )}
               </div>
             </div>
 

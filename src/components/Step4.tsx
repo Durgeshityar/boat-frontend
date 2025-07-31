@@ -93,16 +93,13 @@ export default function Step4() {
             />
 
             <div
-              className="my-8 bg-[#FFFFFF0D] border border-[#FFFFFF80] rounded-3xl backdrop-blur-lg relative"
+              className="my-8 bg-[#FFFFFF0D] border border-[#FFFFFF80] rounded-3xl backdrop-blur-lg relative mx-auto"
               style={{
                 border: "1px solid #FFFFFF80",
-                boxShadow: `
-                  2.2px 4.6px 12.2px 5.5px #A6D9F532,
-                 -1.9px -4px 12px 5.5px #6A685622
-                `,
-                height: 450,
-                width: 350,
-                margin: "0 auto",
+                boxShadow: `2.2px 4.6px 12.2px 5.5px #A6D9F532, -1.9px -4px 12px 5.5px #6A685622`,
+                width: "90%",
+                maxWidth: 350,
+                aspectRatio: "7 / 9",
               }}
             >
               <img
