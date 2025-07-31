@@ -56,7 +56,7 @@ export default function Home() {
     }, 8000);
     return () => clearTimeout(timer);
   }
-}, [currentStep, nextStep]);
+}, [currentStep]);
 
   const renderStep = () => {
     switch (currentStep) {

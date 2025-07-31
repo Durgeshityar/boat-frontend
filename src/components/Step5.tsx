@@ -155,7 +155,7 @@ export default function Step5({ userDetails }: Step5Props) {
             <h2 className="text-[26px] font-light text-white mb-3">
               This Is Where You&#39;re Headed
             </h2>
-            <p className="text-white/70 text-md font-light">
+            <p className="text-white/70 text-basefont-light">
               Based on your lifestyle today, here&#39;s what&#39;s possible in
               1, 3 and 5 years.
             </p>
@@ -392,7 +392,7 @@ export default function Step5({ userDetails }: Step5Props) {
 
 <button
   type="submit"
-  className={`mb-5 mx-auto relative z-10 w-full h-14 rounded-full font-medium text-md
+  className={`mb-5 mx-auto relative z-10 w-full h-14 rounded-full font-medium text-base
     flex items-center justify-center gap-2
     shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)]
     border-[3px] border-[#FFFFFF66]
@@ -402,7 +402,11 @@ export default function Step5({ userDetails }: Step5Props) {
     focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30
     my-1
   `}
-  style={{ backdropFilter: "blur(36px)" }}
+  style={{ backdropFilter: "blur(36px)",
+            backgroundSize: "105% 105%",
+        backgroundPosition: "center",
+        backgroundRepeat: "repeat",
+   }}
 >
   <span aria-hidden className="flex">
     <img src="/share.svg" alt="" aria-hidden />

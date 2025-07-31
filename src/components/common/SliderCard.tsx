@@ -35,7 +35,7 @@ export function SliderCard({
 
   return (
     <div
-      className="bg-[#020D11B2] rounded-2xl p-6 backdrop-blur-lg mb-6"
+      className="bg-[#020D11B2] rounded-2xl p-6 backdrop-blur-lg mb-6 md:mb-0 md:w-full"
       style={{
         border: error ? "1px solid #FFE99980" : "1px solid #FFFFFF14",
       }}

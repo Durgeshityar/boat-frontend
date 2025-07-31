@@ -4,10 +4,13 @@ import { useEffect, useState } from "react";
 import Stepper from "./common/Stepper";
 import Header from "./common/Header";
 import Footer from "./common/Footer";
+import UserImageCard from "./common/UserImageCard";
+import CtaButton from "./common/CtaButton";
 
 export default function Step4() {
   const [dots, setDots] = useState("");
   const [factIndex, setFactIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   const facts = [
     "Your biological age can be younger than your real age — with the right habits.",
@@ -28,9 +31,26 @@ export default function Step4() {
   useEffect(() => {
     const factInterval = setInterval(() => {
       setFactIndex((prev) => (prev + 1) % facts.length);
-    }, 4000);
+    }, 400);
     return () => clearInterval(factInterval);
   }, [facts.length]);
+
+  useEffect(() => {
+    let currentProgress = 50; // Starting from 50% as per previous steps
+    const progressInterval = setInterval(() => {
+      if (currentProgress < 100) {
+        currentProgress += 5;
+        setProgress(currentProgress);
+      } else {
+        clearInterval(progressInterval);
+      }
+    }, 200); // Update every 200ms TODO: This is temporary
+    return () => clearInterval(progressInterval);
+  }, []);
+
+  const handleStartOver = () => {
+    window.location.reload();
+  };
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col">
@@ -55,7 +75,7 @@ export default function Step4() {
         src="/step4-bg-1.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute z-10 w-[100vw]"
+        className="pointer-events-none select-none absolute z-10 w-[100vw] md:hidden"
         style={{
           top: "50px",
         }}
@@ -64,7 +84,7 @@ export default function Step4() {
         src="/step4-bg-2.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute z-10 w-[100vw]"
+        className="pointer-events-none select-none absolute z-10 w-[100vw] md:hidden"
         style={{
           top: "200px",
         }}
@@ -73,7 +93,7 @@ export default function Step4() {
         src="/step4-bg-3.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute z-10 w-[100vw]"
+        className="pointer-events-none select-none absolute z-10 w-[100vw] md:hidden"
         style={{
           top: "582.33px",
           right: "0",
@@ -81,10 +101,24 @@ export default function Step4() {
       />
 
       <div className="relative z-30 flex flex-col min-h-screen">
-        <Header />
-        <Stepper currentStep={4} />
+        <Header
+          centerElement={<Stepper currentStep={3} />}
+          ctaButton={
+            <CtaButton
+              onClick={handleStartOver}
+              style={{
+                width: "160px",
+                height: "48px",
+              }}
+            >
+              Start Over
+            </CtaButton>
+          }
+        />
 
-        <main className="flex-1 flex flex-col items-center justify-start px-4 max-w-xl mx-auto w-full">
+        {/* Mobile View */}
+        <main className="flex-1 flex flex-col items-center justify-start px-4 max-w-xl mx-auto w-full mb-16 md:hidden">
+          <Stepper currentStep={4} />
           <div className="mb-8 w-full">
             <div
               className="w-full h-px mb-8"
@@ -93,10 +127,10 @@ export default function Step4() {
             />
 
             <div
-              className="my-8 bg-[#FFFFFF0D] border border-[#FFFFFF80] rounded-3xl backdrop-blur-lg relative mx-auto"
+              className="my-8 bg-[#FFFFFF0D] rounded-3xl backdrop-blur-lg relative mx-auto"
               style={{
-                border: "1px solid #FFFFFF80",
-                boxShadow: `2.2px 4.6px 12.2px 5.5px #A6D9F532, -1.9px -4px 12px 5.5px #6A685622`,
+                border: "1px solid rgba(255, 255, 255, 0.5)",
+                boxShadow: `-11px -17px 58.3px 20px #6A6856, 8px 20px 72.3px 20px rgba(166, 217, 245, 0.4)`,
                 width: "90%",
                 maxWidth: 350,
                 aspectRatio: "7 / 9",
@@ -105,12 +139,22 @@ export default function Step4() {
               <img
                 src="/rectangle-bg-1.svg"
                 alt="Background 1"
-                className="absolute rounded-r-[20px] pointer-events-none"
+                className="absolute top-0 right-0 pointer-events-none"
+                style={{
+                  width: "100%",
+                  zIndex: 100,
+                  borderRadius: "0 20px 0 0",
+                }}
               />
               <img
                 src="/rectangle-bg-2.svg"
                 alt="Background 2"
-                className="absolute bottom-0 pointer-events-none"
+                className="absolute bottom-0 left-0 pointer-events-none"
+                style={{
+                  width: "100%",
+                  zIndex: 100,
+                  borderRadius: "0px 0px 0px 20px",
+                }}
               />
 
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
@@ -150,8 +194,10 @@ export default function Step4() {
                   }}
                 />
                 <div className="flex-1 px-4">
-                  <h3 className="text-[#8C8C97] mb-2 text-md">DID YOU KNOW?</h3>
-                  <p className="text-slate-300">{facts[factIndex]}</p>
+                  <h3 className="text-[#8C8C97] mb-2 text-base">
+                    DID YOU KNOW?
+                  </h3>
+                  <p className="text-white font-light">{facts[factIndex]}</p>
                 </div>
                 <div className="flex flex-col justify-center items-center bg-[#FFFFFF0A] rounded-full py-2 px-1 h-[50px] w-5">
                   {[0, 1, 2].map((i) => (
@@ -169,6 +215,65 @@ export default function Step4() {
             </div>
           </div>
         </main>
+
+        {/* Desktop View */}
+        <div
+          className="hidden md:flex md:mt-4 md:w-[95%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl mb-10"
+          style={{
+            backgroundImage:
+              "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
+            backgroundPosition: "top right, bottom left",
+            backgroundRepeat: "no-repeat, no-repeat",
+            backgroundSize: "auto, auto",
+          }}
+        >
+          <main className="hidden md:flex flex-1 flex-col items-center justify-start px-4 max-w-2xl mx-auto w-full mb-16">
+            <div className="w-full flex justify-center mb-8 mt-12">
+              <UserImageCard
+                userPhotoUrl={userPhotoUrl}
+                step={4}
+                progress={progress}
+              />
+            </div>
+
+            <div
+              style={{ backdropFilter: "blur(60px)" }}
+              className="bg-[#020D11B2] border border-[#FFFFFF14] rounded-2xl p-6 w-full min-w-[700px] max-h-[100px]"
+            >
+              <div className="flex justify-between items-center">
+                <div
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #FFE999 0%, #8ED0F3 100%)",
+                    borderRadius: "10px",
+                    width: "4px",
+                    height: "-webkit-fill-available",
+                  }}
+                />
+                <div className="flex-1 px-4">
+                  <h3 className="text-[#8C8C97] mb-2 text-base">
+                    DID YOU KNOW?
+                  </h3>
+                  <p className="text-white text-base font-light">
+                    {facts[factIndex]}
+                  </p>
+                </div>
+                <div className="flex flex-col justify-center items-center bg-[#FFFFFF0A] rounded-full py-2 px-1 h-[50px] w-5">
+                  {[0, 1, 2].map((i) => (
+                    <div
+                      key={i}
+                      className={`w-1.5 h-1.5 rounded-full mb-2 last:mb-0 transition-all`}
+                      style={{
+                        backgroundColor:
+                          i === factIndex ? "#FFFFFF" : "#FFFFFF1A",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
         <Footer />
       </div>
     </div>

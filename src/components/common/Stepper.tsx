@@ -28,11 +28,15 @@ export default function Stepper({ currentStep }: StepperProps) {
             ) : (
               <div className="w-5 h-5 rounded-full border border-[#FFFFFF66] bg-transparent transition-all duration-200" />
             )}
+
             {idx === phaseIdx && (
-              <span className="mx-1 font-normal text-base text-white">
+              <span className="mx-1 font-normal text-base text-white md:hidden">
                 {PHASE_LABELS[idx]}
               </span>
             )}
+            <span className="mx-1 font-normal text-base text-white hidden md:block">
+              {PHASE_LABELS[idx]}
+            </span>
           </div>
           {idx < 2 && (
             <div
