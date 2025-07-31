@@ -27,7 +27,7 @@ export default function UserImageCard({
     <div
       className="relative mx-auto overflow-hidden rounded-2xl mt-6"
       style={{
-        width: "400px",
+        width: "var(--user-image-card-width, 400px)",
         height: "550px",
         border: "1px solid rgba(255, 255, 255, 0.5)",
         boxShadow:
