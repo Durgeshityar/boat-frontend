@@ -171,7 +171,7 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
                         className="w-8 h-7"
                       />
                     </div>
-                    <p className="text-white mb-2 text-md">
+                    <p className="text-white mb-2 text-base">
                       Drop your photo here or
                       <br />
                       tap to upload

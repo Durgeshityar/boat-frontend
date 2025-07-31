@@ -392,7 +392,7 @@ export default function Step5({ userDetails }: Step5Props) {
 
 <button
   type="submit"
-  className={`mb-5 mx-auto relative z-10 w-full h-14 rounded-full font-medium text-md
+  className={`mb-5 mx-auto relative z-10 w-full h-14 rounded-full font-medium text-base
     flex items-center justify-center gap-2
     shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)]
     border-[3px] border-[#FFFFFF66]

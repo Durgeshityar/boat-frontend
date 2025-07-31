@@ -6,7 +6,11 @@ interface CtaButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-export default function CtaButton({ children, className = "", ...props }: CtaButtonProps) {
+export default function CtaButton({
+  children,
+  className = "",
+  ...props
+}: CtaButtonProps) {
   return (
     <button
       type="submit"
@@ -21,7 +25,12 @@ export default function CtaButton({ children, className = "", ...props }: CtaBut
         my-1
         ${className}
       `}
-      style={{ backdropFilter: "blur(36px)" }}
+      style={{
+        backdropFilter: "blur(36px)",
+        backgroundSize: "105% 105%",
+        backgroundPosition: "center",
+        backgroundRepeat: "repeat",
+      }}
       {...props}
     >
       {children}

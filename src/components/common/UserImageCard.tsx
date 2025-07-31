@@ -27,11 +27,11 @@ export default function UserImageCard({
     <div
       className="relative mx-auto overflow-hidden rounded-2xl mt-6"
       style={{
-        width: "468px",
-        height: "664px",
+        width: "400px",
+        height: "550px",
         border: "1px solid rgba(255, 255, 255, 0.5)",
         boxShadow:
-          "-21px -37px 58.3px 20px #6A6856, 8px 30px 72.3px 20px rgba(166, 217, 245, 0.4)",
+          "-11px -17px 58.3px 20px #6A6856, 8px 20px 72.3px 20px rgba(166, 217, 245, 0.4)",
       }}
     >
       <img
