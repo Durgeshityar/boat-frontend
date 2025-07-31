@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Stepper from "./stepper";
-import Header from "./header";
-import Footer from "./footer";
+import Stepper from "./common/Stepper";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 export default function Step4() {
   const [dots, setDots] = useState("");

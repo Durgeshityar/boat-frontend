@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Landing from "@/components/landing";
-import Step1 from "@/components/step1";
-import Step2 from "@/components/step2";
-import Step3 from "@/components/step3";
-import Step4 from "@/components/step4";
-import Step5 from "@/components/step5";
+import Landing from "@/components/Landing";
+import Step1 from "@/components/Step1";
+import Step2 from "@/components/Step2";
+import Step3 from "@/components/Step3";
+import Step4 from "@/components/Step4";
+import Step5 from "@/components/Step5";
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);

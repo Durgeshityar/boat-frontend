@@ -2,11 +2,10 @@
 
 import type React from "react";
 import { useState } from "react";
-import CtaButton from "@/components/ui/CtaButton";
-import { Upload } from "lucide-react";
-import Header from "./header";
-import Footer from "./footer";
-import Stepper from "./stepper";
+import CtaButton from "@/components/common/CtaButton";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
+import Stepper from "./common/Stepper";
 
 interface Step1Props {
   userName: string;

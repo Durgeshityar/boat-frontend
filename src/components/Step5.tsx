@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import CtaButton from "@/components/ui/CtaButton";
+import CtaButton from "@/components/common/CtaButton";
 import { User, Zap, Brain, Heart, Copy, Download, Share } from "lucide-react";
-import Header from "./header";
-import Footer from "./footer";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 interface Step5Props {
   userName: string;

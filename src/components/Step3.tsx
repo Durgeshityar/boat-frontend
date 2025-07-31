@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import CtaButton from "@/components/ui/CtaButton";
-import Header from "./header";
-import Stepper from "./stepper";
-import Footer from "./footer";
-import ProfileBadge from "./ProfileBadge";
-import { SliderCard } from "./SliderCard";
+import CtaButton from "@/components/common/CtaButton";
+import Header from "./common/Header";
+import Stepper from "./common/Stepper";
+import Footer from "./common/Footer";
+import ProfileBadge from "./common/ProfileBadge";
+import { SliderCard } from "./common/SliderCard";
 
 interface Step3Props {
   userName: string;

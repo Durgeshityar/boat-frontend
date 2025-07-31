@@ -3,9 +3,9 @@
 import type React from "react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import CtaButton from "@/components/ui/CtaButton";
-import Header from "./header";
-import Footer from "./footer";
+import CtaButton from "@/components/common/CtaButton";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 interface LandingProps {
   onSubmit: (name: string) => void;
