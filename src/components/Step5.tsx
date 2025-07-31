@@ -402,7 +402,11 @@ export default function Step5({ userDetails }: Step5Props) {
     focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30
     my-1
   `}
-  style={{ backdropFilter: "blur(36px)" }}
+  style={{ backdropFilter: "blur(36px)",
+            backgroundSize: "105% 105%",
+        backgroundPosition: "center",
+        backgroundRepeat: "repeat",
+   }}
 >
   <span aria-hidden className="flex">
     <img src="/share.svg" alt="" aria-hidden />

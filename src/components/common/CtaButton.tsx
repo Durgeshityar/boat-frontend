@@ -9,8 +9,18 @@ interface CtaButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export default function CtaButton({
   children,
   className = "",
+  style = {},
   ...props
 }: CtaButtonProps) {
+  const internalStyle: React.CSSProperties = {
+    backdropFilter: "blur(36px)",
+    backgroundSize: "105% 105%",
+    backgroundPosition: "center",
+    backgroundRepeat: "repeat",
+  };
+
+  const mergedStyle = { ...internalStyle, ...style };
+
   return (
     <button
       type="submit"
@@ -25,12 +35,7 @@ export default function CtaButton({
         my-1
         ${className}
       `}
-      style={{
-        backdropFilter: "blur(36px)",
-        backgroundSize: "105% 105%",
-        backgroundPosition: "center",
-        backgroundRepeat: "repeat",
-      }}
+      style={mergedStyle}
       {...props}
     >
       {children}
