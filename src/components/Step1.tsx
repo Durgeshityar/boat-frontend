@@ -75,7 +75,6 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
             "radial-gradient(ellipse at center, transparent 20%, black)",
         }}
       />
-      {/* Mobile-only background images */}
       <img
         src="/step1-bg-1.svg"
         alt=""
@@ -107,8 +106,10 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
           }
         />
 
-        {/* Mobile View */}
         <div className="flex-1 flex flex-col items-center justify-start px-4 max-w-md mx-auto w-full md:hidden">
+          <Stepper
+            currentStep={1}
+          />
           <div className="mb-8">
             <h2 className="text-2xl font-light text-white mb-3 text-left">
               Let&#39;s Get to Know You, {userName}
@@ -206,9 +207,8 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
             <CtaButton onClick={handleNextClick}>Upload your photo</CtaButton>
           </div>
         </div>
-        {/* Desktop View */}
         <div
-          className="hidden md:flex md:mt-4 md:w-[95%] flex-col items-center justify-start mx-auto p-8 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0D] flex-1 relative overflow-hidden"
+          className="hidden md:flex md:my-4 md:w-[95%] flex-col items-center justify-start mx-auto p-8 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0D] flex-1 relative overflow-hidden"
           style={{
             backgroundImage:
               "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
