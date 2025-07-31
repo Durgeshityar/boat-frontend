@@ -7,6 +7,7 @@ import Stepper from "./common/Stepper";
 import Footer from "./common/Footer";
 import ProfileBadge from "./common/ProfileBadge";
 import { SliderCard } from "./common/SliderCard";
+import UserImageCard from "./common/UserImageCard";
 
 interface Step2Props {
   userName: string;
@@ -210,7 +211,7 @@ export default function Step2({ userName, userDetails, onSubmit }: Step2Props) {
 >
   <div className="w-1/2 p-12 flex flex-col justify-start z-10">
     <div className="mb-10">
-      <h2 className="text-3xl font-light text-white mb-3">
+      <h2 className="text-3xl font-light text-white mb-3  mt-10">
         Your journey starts here, {userName}
       </h2>
       <p className="text-white/60 text-base font-light">
@@ -299,14 +300,8 @@ export default function Step2({ userName, userDetails, onSubmit }: Step2Props) {
     </div>
   </div>
 
-  <div className="w-1/2 flex items-center justify-center p-12 z-10">
-    <div className="w-[300px] h-[450px] rounded-3xl overflow-hidden border border-[#FFFFFF1A] shadow-lg">
-      <img
-        src={userPhotoUrl}
-        alt="user"
-        className="w-full h-full object-cover"
-      />
-    </div>
+  <div className="w-1/2 flex items-start justify-center p-12 z-10 mt-10">
+   <UserImageCard userPhotoUrl={userPhotoUrl} step={2} />
   </div>
 </div>
 

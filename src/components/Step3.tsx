@@ -7,6 +7,7 @@ import Stepper from "./common/Stepper";
 import Footer from "./common/Footer";
 import ProfileBadge from "./common/ProfileBadge";
 import { SliderCard } from "./common/SliderCard";
+import UserImageCard from "./common/UserImageCard";
 
 interface Step3Props {
   userName: string;
@@ -59,6 +60,10 @@ export default function Step3({
     }
   };
 
+  const handleStartOver = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col">
       <div className="absolute inset-0 z-0 bg-[#020D11]" />
@@ -79,11 +84,12 @@ export default function Step3({
         }}
       />
 
+      {/* Mobile background images */}
       <img
         src="/step1-bg-1.svg"
         alt=""
         aria-hidden="true"
-        className="absolute left-0 pointer-events-none select-none w-[100vw]"
+        className="absolute left-0 pointer-events-none select-none w-[100vw] md:hidden"
         style={{
           top: "50px",
         }}
@@ -92,7 +98,7 @@ export default function Step3({
         src="/step1-bg-2.svg"
         alt=""
         aria-hidden="true"
-        className="absolute left-0 pointer-events-none select-none w-full"
+        className="absolute left-0 pointer-events-none select-none w-full md:hidden"
         style={{
           top: "350px",
         }}
@@ -101,16 +107,31 @@ export default function Step3({
         src="/step3-bg-3.svg"
         alt=""
         aria-hidden="true"
-        className="absolute left-0 pointer-events-none select-none w-[100vw]"
+        className="absolute left-0 pointer-events-none select-none w-[100vw] md:hidden"
         style={{
           bottom: "0",
           right: "0",
         }}
       />
+
       <div className="relative z-30 flex flex-col min-h-screen">
-        <Header />
-        <Stepper currentStep={3} />
-        <main className="flex-1 flex flex-col items-center justify-start px-4 max-w-xl mx-auto w-full mb-16">
+        <Header
+          centerElement={<Stepper currentStep={3} />}
+          ctaButton={
+            <CtaButton
+              onClick={handleStartOver}
+              style={{
+                width: "160px",
+                height: "48px",
+              }}
+            >
+              Start Over
+            </CtaButton>
+          }
+        />
+        {/* Mobile View */}
+        <main className="flex-1 flex flex-col items-center justify-start px-4 max-w-xl mx-auto w-full mb-16 md:hidden">
+          <Stepper currentStep={3} />
           <div className="mb-8 w-full">
             <div className="flex items-center justify-center gap-4 mb-4">
               <ProfileBadge
@@ -125,8 +146,8 @@ export default function Step3({
                 &amp; Feel, {userName}?
               </h2>
             </div>
-            <p className="text-white/60 text-center text-basefont-light">
-              These daily choices shape your tomorrow —
+            <p className="text-white/60 text-center text-base font-light">
+              These daily choices shape your tomorrow -
               <br />
               let&#39;s map them out.
             </p>
@@ -222,6 +243,131 @@ export default function Step3({
 
           <CtaButton onClick={handleSubmit}>See Your Future Self</CtaButton>
         </main>
+
+        {/* Desktop View */}
+        <div
+          className="hidden md:flex md:mt-4 md:w-[95%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl"
+          style={{
+            backgroundImage:
+              "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
+            backgroundPosition: "top right, bottom left",
+            backgroundRepeat: "no-repeat, no-repeat",
+            backgroundSize: "auto, auto",
+          }}
+        >
+          <div className="w-1/2 p-12 flex flex-col justify-start z-10">
+            <div className="mb-10">
+              <h2 className="text-3xl font-light text-white mb-3 mt-10">
+                How You Move, Fuel &amp; Feel, {userName}?
+              </h2>
+              <p className="text-white/60 text-base font-light">
+                These daily choices shape your tomorrow - let&#39;s map them
+                out.
+              </p>
+            </div>
+
+            <div
+              className="h-px mb-8 w-full"
+              style={{ backgroundColor: "#FFFFFF33" }}
+            />
+
+            <div className="flex flex-col gap-4 items-center">
+              <SliderCard
+                title="On average, how many hours do you sleep?"
+                description="Sleep is your body's ultimate recovery system."
+                min={0}
+                max={10}
+                step={0.5}
+                value={activity.sleep}
+                threshold={6}
+                unit="h"
+                onChange={(value) => setActivity({ ...activity, sleep: value })}
+                error={errors.sleep}
+              />
+
+              <SliderCard
+                title="What's your daily water intake?"
+                description="How many glasses of water do you drink daily on average?"
+                min={0}
+                max={3000}
+                step={250}
+                value={activity.water}
+                threshold={2000}
+                unit="ml"
+                onChange={(value) => setActivity({ ...activity, water: value })}
+                error={errors.water}
+              >
+                <div className="flex justify-center gap-3">
+                  {Array.from({ length: 12 }).map((_, index) => {
+                    const filled = activity.water >= (index + 1) * 250;
+                    const src = filled
+                      ? "/filled-glass.svg"
+                      : "/empty-glass.svg";
+                    return (
+                      <img
+                        key={index}
+                        src={src}
+                        alt={filled ? "Filled glass" : "Empty glass"}
+                        width={15}
+                        height={20}
+                        className="transition-all"
+                      />
+                    );
+                  })}
+                </div>
+              </SliderCard>
+
+              <SliderCard
+                title="Steps Per Day"
+                description="How many steps do you usually take per day?"
+                min={0}
+                max={20}
+                step={0.25}
+                value={activity.steps}
+                threshold={12}
+                unit="k"
+                onChange={(value) => setActivity({ ...activity, steps: value })}
+                error={errors.steps}
+              />
+
+              <SliderCard
+                title="Calorie Intake"
+                description="Roughly how many calories do you consume daily?"
+                min={1000}
+                max={3500}
+                step={500}
+                value={activity.calories}
+                threshold={2000}
+                unit=""
+                onChange={(value) =>
+                  setActivity({ ...activity, calories: value })
+                }
+                error={errors.calories}
+              />
+
+              {showValidation && (
+                <p
+                  className="text-[#FFE999] text-sm mb-2 select-none"
+                  aria-live="polite"
+                >
+                  Please complete all fields before continuing.
+                </p>
+              )}
+
+              <CtaButton
+                onClick={handleSubmit}
+                style={{ width: "fit-content", padding: "12px 24px" }}
+              >
+                See Your Future Self
+              </CtaButton>
+            </div>
+          </div>
+
+          <div className="w-1/2 flex items-start justify-center p-12 z-10 mt-10">
+            <UserImageCard userPhotoUrl={userPhotoUrl} step={3} />
+          </div>
+        </div>
+
         <Footer />
       </div>
     </div>
