@@ -99,7 +99,7 @@ export default function Landing({ onSubmit }: LandingProps) {
             >
               Can Your Habits Beat Time?
             </h2>
-            <p className="text-white/80 text-md font-light text-center leading-relaxed max-w-3xl">
+            <p className="text-white/80 text-basefont-light text-center leading-relaxed max-w-3xl">
               Real habits. Real data. A real glimpse
               <br />
               into what's next.

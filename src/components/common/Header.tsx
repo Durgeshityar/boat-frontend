@@ -30,7 +30,7 @@ export default function Header({ ctaButton, centerElement }: HeaderProps) {
         className="
           hidden md:flex items-center
           h-[80px] w-full px-10
-          bg-transparent
+          bg-transparent pt-[20px]
         "
         style={{
           justifyContent: centerElement ? "space-between" : "flex-between",

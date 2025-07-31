@@ -104,7 +104,7 @@ export default function Step2({ userName, userDetails, onSubmit }: Step2Props) {
                 Your journey starts here, {userName}
               </h2>
             </div>
-            <p className="text-white/60 text-center text-md font-light">
+            <p className="text-white/60 text-center text-basefont-light">
               Just a few questions to set your foundation.
               <br />
               Your journey starts here.

@@ -155,7 +155,7 @@ export default function Step5({ userDetails }: Step5Props) {
             <h2 className="text-[26px] font-light text-white mb-3">
               This Is Where You&#39;re Headed
             </h2>
-            <p className="text-white/70 text-md font-light">
+            <p className="text-white/70 text-basefont-light">
               Based on your lifestyle today, here&#39;s what&#39;s possible in
               1, 3 and 5 years.
             </p>

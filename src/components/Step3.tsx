@@ -125,7 +125,7 @@ export default function Step3({
                 &amp; Feel, {userName}?
               </h2>
             </div>
-            <p className="text-white/60 text-center text-md font-light">
+            <p className="text-white/60 text-center text-basefont-light">
               These daily choices shape your tomorrow —
               <br />
               let&#39;s map them out.
