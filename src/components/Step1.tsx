@@ -14,12 +14,17 @@ interface Step1Props {
 
 export default function Step1({ userName, onPhotoUpload }: Step1Props) {
   const [dragOver, setDragOver] = useState(false);
+  const [photoData, setPhotoData] = useState<string | null>(null);
+  const [showValidation, setShowValidation] = useState(false);
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       if (e.target?.result) {
-        onPhotoUpload(e.target.result as string);
+        const result = e.target.result as string;
+        setPhotoData(result);
+        setShowValidation(false);
+        onPhotoUpload(result);
       }
     };
     reader.readAsDataURL(file);
@@ -38,6 +43,14 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
     const file = e.target.files?.[0];
     if (file) {
       handleFileUpload(file);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (!photoData) {
+      setShowValidation(true);
+    } else {
+      setShowValidation(false);
     }
   };
 
@@ -77,7 +90,7 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
         className="absolute left-0 pointer-events-none select-none w-[100vw]"
         style={{
           top: "350px",
-          left:"0",
+          left: "0",
         }}
       />
 
@@ -90,7 +103,8 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
               Let's Get to Know You, {userName}
             </h2>
             <p className="text-white/60 text-md font-light text-left md:text-center">
-              A few quick questions to set the foundation. Just you and your daily rhythms.
+              A few quick questions to set the foundation. Just you and your
+              daily rhythms.
             </p>
           </div>
 
@@ -114,10 +128,8 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
               inputs.
             </p>
             <div
-              className={`border border-[#FFFFFF33] border-dashed rounded-2xl w-full p-7 text-center mb-8 transition-colors ${
-                dragOver
-                  ? "border-yellow-400"
-                  : "border-slate-600"
+              className={`border border-dashed rounded-2xl w-full p-7 text-center mb-2 transition-colors ${
+                dragOver ? "border-yellow-400" : "border-slate-600"
               }`}
               onDragOver={(e) => {
                 e.preventDefault();
@@ -127,46 +139,53 @@ export default function Step1({ userName, onPhotoUpload }: Step1Props) {
               onDrop={handleDrop}
               style={{
                 backdropFilter: "blur(27px)",
+                borderColor: showValidation ? "#FFE99980" : undefined,
               }}
             >
               <div className="flex flex-col items-center">
                 <div className="w-20 h-20 bg-[#F5F5F51A] rounded-3xl flex items-center justify-center mb-4">
                   <img
                     src="/upload-cloud.svg"
-                    alt="Uploaded photo"
+                    alt="Upload icon"
                     className="w-8 h-7"
                   />
                 </div>
                 <p className="text-white mb-2 text-md">
                   Drop your photo here or
-                  <br/>
+                  <br />
                   tap to upload
                 </p>
                 <p className="text-[#FFFFFF80] text-sm mt-2">
                   JPEG, PNG or GIF — max 800×800px
                 </p>
+                <label
+                  htmlFor="file-upload"
+                  className="absolute inset-0 w-full h-full cursor-pointer bg-[#FFFFFF0D] rounded-2xl"
+                  style={{
+                    backdropFilter: "blur(27px)",
+                  }}
+                >
+                  <input
+                    id="file-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                  />
+                </label>
               </div>
-             <label
-  htmlFor="file-upload"
-  className="absolute inset-0 w-full h-full cursor-pointer bg-[#FFFFFF0D] rounded-2xl"
-  style={{
-    backdropFilter: "blur(27px)",
-  }}
->
-  <input
-    id="file-upload"
-    type="file"
-    accept="image/*"
-    onChange={handleFileSelect}
-    className="hidden"
-  />
-</label>
-
             </div>
 
-            <CtaButton onClick={() => onPhotoUpload("/placeholder.svg?height=200&width=200")}>
-              Upload your photo
-            </CtaButton>
+            {showValidation && (
+              <p
+                className="text-[#FFE999] text-sm mb-4 select-none"
+                aria-live="polite"
+              >
+                Please upload a photo to continue.
+              </p>
+            )}
+
+            <CtaButton onClick={handleNextClick}>Continue</CtaButton>
           </div>
         </div>
         <Footer />

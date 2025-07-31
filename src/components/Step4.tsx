@@ -16,7 +16,7 @@ export default function Step4() {
   ];
 
   const userPhotoUrl =
-    "https://i.pinimg.com/736x/0c/de/64/0cde642b047ceb6034ecc752cd7c1fe9.jpg";
+    "https://manofmany.com/wp-content/uploads/2022/02/Green-and-Gold-feature-400x300.jpg";
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,7 +51,6 @@ export default function Step4() {
             "radial-gradient(ellipse at center, transparent 20%, black)",
         }}
       />
-
       <img
         src="/step4-bg-1.svg"
         alt=""
@@ -98,8 +97,8 @@ export default function Step4() {
               style={{
                 border: "1px solid #FFFFFF80",
                 boxShadow: `
-                  6.06px 12.4px 34.11px 15.15px #A6D9F566,
-                 -5.59px -12.31px 33.84px 15.15px #6A6856
+                  2.2px 4.6px 12.2px 5.5px #A6D9F532,
+                 -1.9px -4px 12px 5.5px #6A685622
                 `,
                 height: 450,
                 width: 350,

@@ -30,17 +30,34 @@ export default function Step3({
   onSubmit,
 }: Step3Props) {
   const [activity, setActivity] = useState(dailyActivity);
+  const [showValidation, setShowValidation] = useState(false);
+  const [errors, setErrors] = useState<{
+    sleep?: boolean;
+    water?: boolean;
+    steps?: boolean;
+    calories?: boolean;
+  }>({});
   const userPhotoUrl =
-    "https://i.pinimg.com/736x/0c/de/64/0cde642b047ceb6034ecc752cd7c1fe9.jpg";
+    "https://manofmany.com/wp-content/uploads/2022/02/Green-and-Gold-feature-400x300.jpg";
 
-  const handleSubmit = () => {
-    onSubmit(activity);
+  const validate = () => {
+    const e: typeof errors = {};
+    if (activity.sleep < 2 || activity.sleep > 10) e.sleep = true;
+    if (activity.water < 250 || activity.water > 3000) e.water = true;
+    if (activity.steps < 1 || activity.steps > 20) e.steps = true;
+    if (activity.calories < 1000 || activity.calories > 3500) e.calories = true;
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
-  const waterGlasses = Array.from(
-    { length: 12 },
-    (_, i) => i < Math.floor(activity.water)
-  );
+  const handleSubmit = () => {
+    if (validate()) {
+      setShowValidation(false);
+      onSubmit(activity);
+    } else {
+      setShowValidation(true);
+    }
+  };
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col">
@@ -62,7 +79,7 @@ export default function Step3({
         }}
       />
 
-             <img
+      <img
         src="/step1-bg-1.svg"
         alt=""
         aria-hidden="true"
@@ -87,7 +104,7 @@ export default function Step3({
         className="absolute left-0 pointer-events-none select-none w-[100vw]"
         style={{
           bottom: "0",
-          right:"0",
+          right: "0",
         }}
       />
       <div className="relative z-30 flex flex-col min-h-screen">
@@ -104,7 +121,8 @@ export default function Step3({
               />
               <h2 className="text-2xl font-light text-white text-left">
                 How You Move, Fuel
-                <br />& Feel, {userName}?
+                <br />
+                &amp; Feel, {userName}?
               </h2>
             </div>
             <p className="text-white/60 text-center text-md font-light">
@@ -120,7 +138,7 @@ export default function Step3({
             aria-hidden="true"
           />
 
-          <div className="space-y-6 mt-8">
+          <div className="space-y-6 mt-8 w-full">
             <SliderCard
               title="On average, how many hours do you sleep?"
               description="Sleep is your body's ultimate recovery system."
@@ -131,6 +149,7 @@ export default function Step3({
               threshold={6}
               unit="h"
               onChange={(value) => setActivity({ ...activity, sleep: value })}
+              error={errors.sleep}
             />
 
             <SliderCard
@@ -143,6 +162,7 @@ export default function Step3({
               threshold={2000}
               unit="ml"
               onChange={(value) => setActivity({ ...activity, water: value })}
+              error={errors.water}
             >
               <div className="flex justify-center gap-3">
                 {Array.from({ length: 12 }).map((_, index) => {
@@ -172,6 +192,7 @@ export default function Step3({
               threshold={12}
               unit="k"
               onChange={(value) => setActivity({ ...activity, steps: value })}
+              error={errors.steps}
             />
 
             <SliderCard
@@ -186,8 +207,18 @@ export default function Step3({
               onChange={(value) =>
                 setActivity({ ...activity, calories: value })
               }
+              error={errors.calories}
             />
           </div>
+
+          {showValidation && (
+            <p
+              className="text-[#FFE999] text-sm mb-4 select-none text-center"
+              aria-live="polite"
+            >
+              Please complete all fields before continuing.
+            </p>
+          )}
 
           <CtaButton onClick={handleSubmit}>See Your Future Self</CtaButton>
         </main>

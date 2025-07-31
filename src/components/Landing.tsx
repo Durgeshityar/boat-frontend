@@ -76,9 +76,10 @@ export default function Landing({ onSubmit }: LandingProps) {
             className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto space-y-4"
           >
             <div
-              className="relative border border-[#FFFFFF1A] rounded-3xl bg-[#FFFFFF0D] flex flex-col items-center p-3 backdrop-blur-lg shadow-lg"
+              className="relative border rounded-3xl bg-[#FFFFFF0D] flex flex-col items-center p-3 backdrop-blur-lg shadow-lg"
               style={{
                 backdropFilter: "blur(27px)",
+                borderColor: "rgba(255,255,255,0.1)",
               }}
             >
               <div
@@ -99,16 +100,20 @@ export default function Landing({ onSubmit }: LandingProps) {
                 aria-invalid={error ? "true" : "false"}
                 aria-describedby="name-error"
                 className={cn(
-                  "relative z-10 block w-full bg-transparent text-base text-white placeholder-white/60 placeholder:text-center rounded-full px-6 py-3 mb-2 outline-none ring-0 border-0 focus:ring-0 focus:outline-none text-center transition",
-                  { "border border-red-500": error }
+                  "relative z-10 block w-full bg-transparent text-base text-white placeholder-white/60 placeholder:text-center rounded-full px-6 py-3 mb-2 outline-none ring-0 border-0 focus:ring-0 focus:outline-none text-center transition"
                 )}
-                style={{ textAlign: "center" }}
+                style={{
+                  textAlign: "center",
+
+                  border: error ? "1px solid #FFE99980" : undefined,
+                }}
               />
               {error && (
                 <p
                   id="name-error"
-                  className="relative z-10 text-sm text-red-400 mb-2 select-none"
+                  className="relative z-10 text-sm select-none mb-2"
                   role="alert"
+                  style={{ color: "#FFE999" }}
                 >
                   {error}
                 </p>
