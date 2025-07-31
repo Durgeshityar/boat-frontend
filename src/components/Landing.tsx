@@ -99,10 +99,10 @@ export default function Landing({ onSubmit }: LandingProps) {
             >
               Can Your Habits Beat Time?
             </h2>
-            <p className="text-white/80 text-basefont-light text-center leading-relaxed max-w-3xl">
+            <p className="text-white/80 text-base font-light text-center leading-relaxed max-w-3xl">
               Real habits. Real data. A real glimpse
               <br />
-              into what's next.
+              into what&apos;s next.
             </p>
           </div>
 
@@ -239,8 +239,8 @@ export default function Landing({ onSubmit }: LandingProps) {
             )}
           >
             <p className="mb-6 font-normal tracking-tight leading-relaxed text-xl">
-              "I didn&apos;t expect sleep and screen time to impact my future
-              this much."
+              &quot;I didn&apos;t expect sleep and screen time to impact my future
+              this much.&quot;
             </p>
             <div className="flex flex-col md:flex-row md:gap-3 items-center justify-center gap-0">
               <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
