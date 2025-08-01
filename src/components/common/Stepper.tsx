@@ -2,11 +2,11 @@ import { Check } from "lucide-react";
 import React from "react";
 
 interface StepperProps {
-  currentStep: 1 | 2 | 3 | 4;
+  currentStep: 1 | 2 | 3 | 4 | 5;
 }
 const PHASE_LABELS = ["Basics", "Daily Rhythm", "Your Results"];
 
-function getPhaseIdx(currentStep: 1 | 2 | 3 | 4): 0 | 1 | 2 {
+function getPhaseIdx(currentStep: 1 | 2 | 3 | 4 | 5): 0 | 1 | 2 {
   if (currentStep === 1 || currentStep === 2) return 0;
   if (currentStep === 3) return 1;
   return 2;

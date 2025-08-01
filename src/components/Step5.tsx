@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import CtaButton from "@/components/common/CtaButton";
-import { User, Zap, Brain, Heart, Copy, Download, Share } from "lucide-react";
+import { User, Zap, Brain, Heart } from "lucide-react";
 import Header from "./common/Header";
 import Footer from "./common/Footer";
+import Stepper from "./common/Stepper";
+import CtaButton from "./common/CtaButton";
 
 interface Step5Props {
   userDetails: {
@@ -75,7 +76,19 @@ export default function Step5({ userDetails }: Step5Props) {
       change: "+19%",
       current: "72%",
     },
+    {
+      icon: Brain,
+      label: "Stress",
+      value: "25",
+      unit: "%",
+      change: "-30%",
+      current: "55%",
+    },
   ];
+
+  const handleStartOver = () => {
+    window.location.href = "/";
+  };
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col">
@@ -100,20 +113,34 @@ export default function Step5({ userDetails }: Step5Props) {
         src="/step1-bg-1.svg"
         alt=""
         aria-hidden="true"
-        className="absolute left-0 pointer-events-none select-none w-[100vw]"
+        className="absolute left-0 pointer-events-none select-none w-[100vw] md:hidden"
         style={{ top: "50px" }}
       />
       <img
         src="/step1-bg-2.svg"
         alt=""
         aria-hidden="true"
-        className="absolute left-0 pointer-events-none select-none w-[100vw]"
+        className="absolute left-0 pointer-events-none select-none w-[100vw] md:hidden"
         style={{ bottom: "0", right: "0" }}
       />
 
       <div className="relative z-30 flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-1 flex flex-col items-center justify-start px-4 max-w-xl mx-auto w-full">
+        <Header
+          centerElement={<Stepper currentStep={5} />}
+          ctaButton={
+            <CtaButton
+              onClick={handleStartOver}
+              style={{
+                width: "160px",
+                height: "48px",
+              }}
+            >
+              Start Over
+            </CtaButton>
+          }
+        />
+        {/* mobile view */}
+        <main className="flex-1 flex flex-col items-center justify-start px-4 max-w-xl mx-auto w-full md:hidden">
           <div
             className="mx-auto mt-12 mb-6 flex items-center justify-center"
             style={{
@@ -365,7 +392,7 @@ export default function Step5({ userDetails }: Step5Props) {
             </div>
             <div className="w-full h-[1px] bg-[#FFFFFF33] mb-6" />
             <div className="w-full flex flex-col gap-3 px-1 mb-8">
-              {metrics.map((metric, idx) => (
+              {metrics.slice(0, 2).map((metric, idx) => (
                 <div
                   key={idx}
                   className="w-full h-14 rounded-[8px] px-4 py-3 bg-[#FFFFFF0D] flex items-center"
@@ -380,52 +407,549 @@ export default function Step5({ userDetails }: Step5Props) {
                 </div>
               ))}
             </div>
-            <div className="w-full max-w-[203px] h-11 rounded-full px-5 py-2 bg-gradient-to-r from-[rgba(255,233,153,0.1)] to-[rgba(142,208,243,0.1)] border border-[rgba(255,233,153,0.7)] flex items-center justify-center mx-auto mb-8">
-              <span className="font-normal text-[16px] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text">
-                #valour_transformation
-              </span>
+
+            <div
+              className="w-full max-w-[203px] h-11 p-[1px] rounded-full mx-auto mb-8"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(255, 233, 153, 0.7) 0%, rgba(142, 208, 243, 0.7) 100%)",
+              }}
+            >
+              <div
+                className="flex items-center justify-center h-full w-full rounded-full"
+                style={{
+                  background: "#141e22",
+                }}
+              >
+                <div
+                  className="flex items-center justify-center h-full w-full rounded-full px-3 py-1"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(255,233,153,0.1), rgba(142,208,243,0.1))",
+                  }}
+                >
+                  <span className="font-normal text-[14px] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text">
+                    #valour_transformation
+                  </span>
+                </div>
+              </div>
             </div>
+
             <div className="w-full h-[1px] bg-[#FFFFFF33] mb-5" />
-           <h4 className="font-light text-[18px] text-center capitalize text-white mb-5 sm:text-[22px]">
-  Own It. Share It. Repeat It.
-</h4>
-
-<button
-  type="submit"
-  className={`mb-5 mx-auto relative z-10 w-full h-14 rounded-full font-medium text-base
-    flex items-center justify-center gap-2
-    shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)]
-    border-[3px] border-[#FFFFFF66]
-    bg-gradient-to-r from-[#FFE999] to-[#8ED0F3]
-    text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB]
-    transition-all duration-200
-    focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30
-    my-1
-  `}
-  style={{ backdropFilter: "blur(36px)",
-            backgroundSize: "105% 105%",
-        backgroundPosition: "center",
-        backgroundRepeat: "repeat",
-   }}
->
-  <span aria-hidden className="flex">
-    <img src="/share.svg" alt="" aria-hidden />
-  </span>
-  Share your results
-</button>
-
-<div className="w-full flex gap-3 mb-5">
-  <button className="flex-[0.8] h-12 rounded-[40px] px-4 py-3 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white font-light text-[15px] flex items-center justify-center">
-    Copy link
-    <Copy className="w-5 h-5 ml-2" />
-  </button>
-  <button className="flex-[0.2] h-12 rounded-[40px] px-4 py-3 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white flex items-center justify-center">
-    <Download className="w-5 h-5" />
-  </button>
-</div>
-
+            <h4 className="font-light text-[18px] text-center capitalize text-white mb-5 sm:text-[22px]">
+              Own It. Share It. Repeat It.
+            </h4>
+            <button
+              type="submit"
+              className={`mb-5 mx-auto relative z-10 w-full h-12 rounded-full font-medium text-base flex items-center justify-center gap-2 shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)] border-[3px] border-[#FFFFFF66] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30 my-1`}
+              style={{
+                backdropFilter: "blur(36px)",
+                backgroundSize: "105% 105%",
+                backgroundPosition: "center",
+                backgroundRepeat: "repeat",
+              }}
+            >
+              <span aria-hidden className="flex">
+                <img src="/share.svg" alt="" aria-hidden />
+              </span>
+              Share your results
+            </button>
+            <div className="w-full flex gap-3 mb-5">
+              <button className="flex-[0.8] h-12 gap-2 rounded-[40px] px-4 py-3 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white font-light text-[15px] flex items-center justify-center">
+                Copy link
+                <span aria-hidden className="flex">
+                  <img src="/copy.svg" alt="" aria-hidden />
+                </span>
+              </button>
+              <button className="flex-[0.2] h-12 rounded-[40px] px-4 py-3 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white flex items-center justify-center">
+                <span aria-hidden className="flex">
+                  <img src="/download.svg" alt="" aria-hidden />
+                </span>
+              </button>
+            </div>
           </div>
         </main>
+
+        {/* desktop view */}
+        <div
+          className="hidden md:flex md:mt-4 md:w-[95%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl mb-8"
+          style={{
+            backgroundImage:
+              "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
+            backgroundPosition: "top right, bottom left",
+            backgroundRepeat: "no-repeat, no-repeat",
+            backgroundSize: "auto, auto",
+            maxHeight: "calc(100vh - 164px)",
+            height: "calc(100vh - 164px)",
+          }}
+        >
+          <div className="relative w-[40%] h-full flex flex-col z-10 bg-transparent">
+            <div
+              className="w-full h-full flex flex-col items-center justify-between px-6 py-6"
+              style={{
+                minHeight: 0,
+              }}
+            >
+              <div
+                style={{
+                  width: "min(140px,20vw)",
+                  height: "min(140px,20vw)",
+                  minWidth: "80px",
+                  minHeight: "80px",
+                  maxWidth: "180px",
+                  maxHeight: "180px",
+                  borderRadius: "50%",
+                  border: "1px solid #FFFFFF80",
+                  boxShadow:
+                    "2.5px 5px 13.5px 6px #A6D9F544, -2.1px -4.6px 13.4px 6px #6A685633",
+                  overflow: "hidden",
+                  background: "#181A20",
+                  marginBottom: "20px",
+                }}
+              >
+                <img
+                  src={userPhotoUrl}
+                  alt="User profile"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                  }}
+                />
+              </div>
+              <div className="w-full h-[1px] bg-[#FFFFFF33] mb-4" />
+
+              <div
+                className="w-full rounded-[20px] bg-[#FFFFFF12] border border-[#FFFFFF80] shadow-[3.2px_6.6px_20.11px_9.6px_#A6D9F544,_-2.9px_-6.5px_20px_9.6px_#6A685633] backdrop-blur-[12px] flex flex-col items-center px-4 py-6 overflow-y-auto"
+                style={{
+                  maxHeight: "calc(100% - 220px)",
+                }}
+              >
+                <h3 className="font-light text-lg tracking-[-0.04em] text-center capitalize text-white mb-2">
+                  Your Future Glow-Up
+                </h3>
+                <div className="w-full h-[1px] bg-[#FFFFFF33] mb-3" />
+                <div className="w-full flex flex-col gap-2 px-1 mb-2">
+                  {metrics.slice(0, 2).map((metric, idx) => (
+                    <div
+                      key={idx}
+                      className="w-full h-12 rounded-[8px] px-3 py-2 bg-[#FFFFFF0D] flex items-center"
+                    >
+                      <metric.icon className="w-5 h-5 text-white stroke-[1.5] mr-2" />
+                      <span className="text-[#FFFFFFB2] font-light text-[15px] mr-auto">
+                        {metric.label}
+                      </span>
+                      <span className="font-light text-[15px] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text">
+                        {metric.change}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div
+                  className="w-fit h-10 p-[1px] rounded-full mx-auto mb-3"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(255, 233, 153, 0.7) 0%, rgba(142, 208, 243, 0.7) 100%)",
+                  }}
+                >
+                  <div
+                    className="flex items-center justify-center h-full w-full rounded-full"
+                    style={{
+                      background: "#3e545e",
+                    }}
+                  >
+                    <div
+                      className="flex items-center justify-center h-full w-full rounded-full px-3 py-1"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, rgba(255,233,153,0.1), rgba(142,208,243,0.1))",
+                      }}
+                    >
+                      <span className="font-normal text-[14px] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-transparent bg-clip-text">
+                        #valour_transformation
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full h-[1px] bg-[#FFFFFF33] mb-2" />
+                <h4 className="font-light text-[16px] text-center capitalize text-white mb-2">
+                  Own It. Share It. Repeat It.
+                </h4>
+                <button
+                  type="submit"
+                  className={`mb-3 mx-auto relative z-10 w-full h-10 rounded-full font-medium text-base flex items-center justify-center gap-2 shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)] border-[2px] border-[#FFFFFF66] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30`}
+                  style={{
+                    backdropFilter: "blur(24px)",
+                    backgroundSize: "105% 105%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "repeat",
+                    fontSize: "15px",
+                  }}
+                >
+                  <span aria-hidden className="flex">
+                    <img src="/share.svg" alt="" aria-hidden />
+                  </span>
+                  Share your results
+                </button>
+                <div className="w-full flex gap-2 mb-2">
+                  <button className="flex-1 h-10 gap-2 rounded-[28px] px-3 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white font-light text-[13px] flex items-center justify-center">
+                    Copy link
+                    <span aria-hidden className="flex">
+                      <img src="/copy.svg" alt="" aria-hidden />
+                    </span>
+                  </button>
+                  <button className="w-10 h-10 rounded-[28px] px-2 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white flex items-center justify-center">
+                    <span aria-hidden className="flex">
+                      <img src="/download.svg" alt="" aria-hidden />
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-[60%] px-8 mt-12 py-16 overflow-y-auto flex flex-col">
+            <div className="text-left mb-8">
+              <h2 className="text-[28px] font-light text-white mb-3">
+                This Is Where You&#39;re Headed
+              </h2>
+              <p className="text-white/70 text-base font-light">
+                Based on your lifestyle today, here&#39;s what&#39;s possible in
+                1, 3 and 5 years.
+              </p>
+            </div>
+
+            <div
+              className="flex items-center mb-10 mt-2"
+              style={{
+                width: "fit-content",
+                height: 60,
+                borderRadius: 56,
+                gap: 8,
+                opacity: 1,
+                border: "1px solid #F4F4F51A",
+                padding: "8px 12px",
+                background: "#F4F4F50D",
+                backdropFilter: "blur(6px)",
+              }}
+            >
+              {["1 year", "2 years", "3 years"].map((period) => {
+                const isSelected = selectedPeriod === period;
+                return (
+                  <button
+                    key={period}
+                    onClick={() => setSelectedPeriod(period)}
+                    style={{
+                      width: 109.67,
+                      height: 44,
+                      borderRadius: 32,
+                      padding: "12px 8px",
+                      marginRight: 8,
+                      background: isSelected ? "#FFFFFF" : "transparent",
+                      color: isSelected ? "#11131A" : "#FFFFFF",
+                      fontSize: 15,
+                      fontWeight: isSelected ? 400 : 300,
+                      lineHeight: "20px",
+                      opacity: 1,
+                      transition: "background 0.2s, color 0.2s",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    className="focus:outline-none"
+                  >
+                    {period}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="text-left mb-4">
+              <h3 className="text-2xl text-white mb-1">Foundation Built 🙌</h3>
+              <p className="text-[#8C8C97] text-sm font-light">
+                Your transformation begins
+              </p>
+            </div>
+
+            <div className="mb-4">
+              <div
+                style={{
+                  background: "#FFFFFF0D",
+                  border: "1px solid #FFFFFF14",
+                  backdropFilter: "blur(60px)",
+                  borderRadius: 24,
+                }}
+                className="p-6 w-full"
+              >
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-4">
+                    <div
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 12,
+                        background: "#FFFFFF0D",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <User
+                        style={{
+                          color: "#FFFFFF",
+                          width: 24,
+                          height: 24,
+                          strokeWidth: 1.5,
+                        }}
+                      />
+                    </div>
+                    <span
+                      style={{
+                        color: "#FFFFFF",
+                        fontWeight: 300,
+                        fontSize: 16,
+                        lineHeight: "22px",
+                      }}
+                    >
+                      Biological age
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      padding: "4px 14px",
+                      borderRadius: 18,
+                      height: 30,
+                      background:
+                        "linear-gradient(90deg, rgba(255, 233, 153, 0.1) 0%, rgba(142, 208, 243, 0.1) 100%)",
+                      display: "inline-flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(90deg, #FFE999 0%, #8ED0F3 100%)",
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                        color: "transparent",
+                        WebkitTextFillColor: "transparent",
+                        fontWeight: 300,
+                        fontSize: 14,
+                        lineHeight: "18px",
+                      }}
+                    >
+                      -2 years
+                    </span>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  <span
+                    style={{
+                      color: "#FFFFFF",
+                      fontWeight: 400,
+                      fontSize: 32,
+                      lineHeight: "40px",
+                    }}
+                  >
+                    {biologicalAge}
+                  </span>
+                  <span
+                    style={{
+                      color: "#FFFFFFCC",
+                      fontWeight: 300,
+                      fontSize: 20,
+                      lineHeight: "28px",
+                      marginLeft: 8,
+                    }}
+                  >
+                    years
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    background: "#FFFFFF0D",
+                    borderRadius: 9999,
+                    padding: "7px 18px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: 12,
+                      color: "#AAAEB5",
+                      fontWeight: 300,
+                      marginRight: 12,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    vs current
+                  </span>
+                  <div
+                    style={{
+                      flexGrow: 1,
+                      height: 1,
+                      background: "#FFFFFF2E",
+                      margin: "0 12px",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontSize: 16,
+                      color: "#FFFFFF",
+                      fontWeight: 300,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {currentAge} years
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-5">
+              {metrics.slice(1).map((metric, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    background: "#FFFFFF0D",
+                    border: "1px solid #FFFFFF14",
+                    backdropFilter: "blur(60px)",
+                    borderRadius: 24,
+                  }}
+                  className="p-6 w-full"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-4">
+                      <div
+                        style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: 12,
+                          background: "#FFFFFF0D",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <metric.icon
+                          style={{
+                            color: "#FFFFFF",
+                            width: 24,
+                            height: 24,
+                            strokeWidth: 1.5,
+                          }}
+                        />
+                      </div>
+                      <span
+                        style={{
+                          color: "#FFFFFF",
+                          fontWeight: 300,
+                          fontSize: 16,
+                          lineHeight: "22px",
+                        }}
+                      >
+                        {metric.label}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        padding: "4px 14px",
+                        borderRadius: 18,
+                        height: 30,
+                        background:
+                          "linear-gradient(90deg, rgba(255, 233, 153, 0.1) 0%, rgba(142, 208, 243, 0.1) 100%)",
+                        display: "inline-flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(90deg, #FFE999 0%, #8ED0F3 100%)",
+                          WebkitBackgroundClip: "text",
+                          backgroundClip: "text",
+                          color: "transparent",
+                          WebkitTextFillColor: "transparent",
+                          fontWeight: 300,
+                          fontSize: 14,
+                          lineHeight: "18px",
+                        }}
+                      >
+                        {metric.change}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mb-4">
+                    <span
+                      style={{
+                        color: "#FFFFFF",
+                        fontWeight: 400,
+                        fontSize: 32,
+                        lineHeight: "40px",
+                      }}
+                    >
+                      {metric.value}
+                    </span>
+                    <span
+                      style={{
+                        color: "#FFFFFFCC",
+                        fontWeight: 300,
+                        fontSize: 20,
+                        lineHeight: "28px",
+                        marginLeft: 8,
+                      }}
+                    >
+                      {metric.unit}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      background: "#FFFFFF0D",
+                      borderRadius: 9999,
+                      padding: "7px 18px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 12,
+                        color: "#AAAEB5",
+                        fontWeight: 300,
+                        marginRight: 12,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      vs current
+                    </span>
+                    <div
+                      style={{
+                        flexGrow: 1,
+                        height: 1,
+                        background: "#FFFFFF2E",
+                        margin: "0 12px",
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontSize: 16,
+                        color: "#FFFFFF",
+                        fontWeight: 300,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {metric.current}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <Footer />
       </div>
     </div>
