@@ -91,7 +91,7 @@ export default function Step2({ userName, userDetails, onSubmit }: Step2Props) {
 
       <div className="relative z-30 flex flex-col min-h-screen">
         <Header
-          centerElement={<Stepper currentStep={1} />}
+          centerElement={<Stepper currentStep={2} />}
           ctaButton={
             <CtaButton
               onClick={handleStartOver}

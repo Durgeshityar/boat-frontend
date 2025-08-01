@@ -31,7 +31,7 @@ export default function Step4() {
   useEffect(() => {
     const factInterval = setInterval(() => {
       setFactIndex((prev) => (prev + 1) % facts.length);
-    }, 400);
+    }, 4000);
     return () => clearInterval(factInterval);
   }, [facts.length]);
 
@@ -102,7 +102,7 @@ export default function Step4() {
 
       <div className="relative z-30 flex flex-col min-h-screen">
         <Header
-          centerElement={<Stepper currentStep={3} />}
+          centerElement={<Stepper currentStep={4} />}
           ctaButton={
             <CtaButton
               onClick={handleStartOver}
