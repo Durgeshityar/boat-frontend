@@ -472,28 +472,28 @@ export default function Step5({ userDetails }: Step5Props) {
 
         {/* desktop view */}
         <div
-          className="hidden md:flex md:mt-4 md:w-[95%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl mb-8"
+          className="hidden md:flex md:mt-4 md:w-[95%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl mb-auto"
           style={{
             backgroundImage:
               "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
             backgroundPosition: "top right, bottom left",
             backgroundRepeat: "no-repeat, no-repeat",
-            backgroundSize: "auto, auto",
+            backgroundSize: "50%, 50%",
             maxHeight: "calc(100vh - 164px)",
             height: "calc(100vh - 164px)",
           }}
         >
-          <div className="relative w-[40%] h-full flex flex-col z-10 bg-transparent">
+          <div className="relative w-[40%] h-full flex flex-col z-10 bg-transparent px-5">
             <div
-              className="w-full h-full flex flex-col items-center justify-between px-6 py-6"
+              className="w-full h-full flex flex-col items-center justify-between px-6 py-6 mt-14"
               style={{
                 minHeight: 0,
               }}
             >
               <div
                 style={{
-                  width: "min(140px,20vw)",
-                  height: "min(140px,20vw)",
+                  width: "min(240px,25vw)",
+                  height: "min(240px,25vw)",
                   minWidth: "80px",
                   minHeight: "80px",
                   maxWidth: "180px",
@@ -501,10 +501,9 @@ export default function Step5({ userDetails }: Step5Props) {
                   borderRadius: "50%",
                   border: "1px solid #FFFFFF80",
                   boxShadow:
-                    "2.5px 5px 13.5px 6px #A6D9F544, -2.1px -4.6px 13.4px 6px #6A685633",
+                    "4.74px 9.7px 26.69px 11.85px #A6D9F566, -4.37px -9.63px 26.48px 11.85px #6A685666",
                   overflow: "hidden",
                   background: "#181A20",
-                  marginBottom: "20px",
                 }}
               >
                 <img
@@ -518,10 +517,10 @@ export default function Step5({ userDetails }: Step5Props) {
                   }}
                 />
               </div>
-              <div className="w-full h-[1px] bg-[#FFFFFF33] mb-4" />
+              <div className="w-full h-[1px] bg-[#FFFFFF33] my-8" />
 
               <div
-                className="w-full rounded-[20px] bg-[#FFFFFF12] border border-[#FFFFFF80] shadow-[3.2px_6.6px_20.11px_9.6px_#A6D9F544,_-2.9px_-6.5px_20px_9.6px_#6A685633] backdrop-blur-[12px] flex flex-col items-center px-4 py-6 overflow-y-auto"
+                className="w-full mx-5 rounded-[20px] bg-[#FFFFFF12] border border-[#FFFFFF80] shadow-[3.2px_6.6px_20.11px_9.6px_#A6D9F544,_-2.9px_-6.5px_20px_9.6px_#6A685633] backdrop-blur-[12px] flex flex-col items-center px-4 py-6 overflow-y-auto"
                 style={{
                   maxHeight: "calc(100% - 220px)",
                 }}
@@ -610,7 +609,7 @@ export default function Step5({ userDetails }: Step5Props) {
             </div>
           </div>
 
-          <div className="w-[60%] px-8 mt-12 py-16 overflow-y-auto flex flex-col">
+          <div className="w-[60%] px-8 mt-8 py-16 overflow-y-auto flex flex-col">
             <div className="text-left mb-8">
               <h2 className="text-[28px] font-light text-white mb-3">
                 This Is Where You&#39;re Headed
