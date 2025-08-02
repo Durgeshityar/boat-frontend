@@ -472,28 +472,25 @@ export default function Step5({ userDetails }: Step5Props) {
 
         {/* desktop view */}
         <div
-          className="hidden md:flex md:mt-4 md:w-[95%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl mb-auto"
+          className="hidden md:flex md:mt-4 md:w-[98%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl mb-auto"
           style={{
             backgroundImage:
               "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
             backgroundPosition: "top right, bottom left",
             backgroundRepeat: "no-repeat, no-repeat",
-            backgroundSize: "50%, 50%",
+            backgroundSize: "70%, 70%",
             maxHeight: "calc(100vh - 164px)",
             height: "calc(100vh - 164px)",
           }}
         >
-          <div className="relative w-[40%] h-full flex flex-col z-10 bg-transparent px-5">
+          <div className="w-[40%] flex flex-col z-10 bg-transparent px-8 overflow-y-auto">
             <div
-              className="w-full h-full flex flex-col items-center justify-between px-6 py-6 mt-14"
-              style={{
-                minHeight: 0,
-              }}
+              className="w-full flex flex-col items-center justify-between px-6 py-6 mt-10"
             >
               <div
                 style={{
-                  width: "min(240px,25vw)",
-                  height: "min(240px,25vw)",
+                  width: "min(180px,20vw)",
+                  height: "min(180px,20vw)",
                   minWidth: "80px",
                   minHeight: "80px",
                   maxWidth: "180px",
@@ -519,12 +516,11 @@ export default function Step5({ userDetails }: Step5Props) {
               </div>
               <div className="w-full h-[1px] bg-[#FFFFFF33] my-8" />
 
-              <div
-                className="w-full mx-5 rounded-[20px] bg-[#FFFFFF12] border border-[#FFFFFF80] shadow-[3.2px_6.6px_20.11px_9.6px_#A6D9F544,_-2.9px_-6.5px_20px_9.6px_#6A685633] backdrop-blur-[12px] flex flex-col items-center px-4 py-6 overflow-y-auto"
-                style={{
-                  maxHeight: "calc(100% - 220px)",
-                }}
-              >
+           <div
+  className="w-full mx-5 rounded-[20px] bg-[#FFFFFF12] border-[0.75px] border-[#FFFFFF80] shadow-[0px_3px_10px_5px_#A6D9F566,_0px_-3px_10px_5px_#6A6856] backdrop-blur-[12px] flex flex-col items-center px-4 py-6"
+>
+
+
                 <h3 className="font-light text-lg tracking-[-0.04em] text-center capitalize text-white mb-2">
                   Your Future Glow-Up
                 </h3>
@@ -578,7 +574,7 @@ export default function Step5({ userDetails }: Step5Props) {
                 </h4>
                 <button
                   type="submit"
-                  className={`mb-3 mx-auto relative z-10 w-full h-10 rounded-full font-medium text-base flex items-center justify-center gap-2 shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)] border-[2px] border-[#FFFFFF66] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30`}
+                  className={`mb-3 mx-auto relative z-10 w-full h-12 rounded-full font-medium text-base flex items-center justify-center gap-2 shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)] border-[2px] border-[#FFFFFF66] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30`}
                   style={{
                     backdropFilter: "blur(24px)",
                     backgroundSize: "105% 105%",
@@ -593,13 +589,13 @@ export default function Step5({ userDetails }: Step5Props) {
                   Share your results
                 </button>
                 <div className="w-full flex gap-2 mb-2">
-                  <button className="flex-1 h-10 gap-2 rounded-[28px] px-3 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white font-light text-[13px] flex items-center justify-center">
+                  <button className="flex-1 h-12 gap-2 rounded-[28px] px-3 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white font-light text-[13px] flex items-center justify-center">
                     Copy link
                     <span aria-hidden className="flex">
                       <img src="/copy.svg" alt="" aria-hidden />
                     </span>
                   </button>
-                  <button className="w-10 h-10 rounded-[28px] px-2 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white flex items-center justify-center">
+                  <button className="w-20 h-12 rounded-[28px] px-2 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white flex items-center justify-center">
                     <span aria-hidden className="flex">
                       <img src="/download.svg" alt="" aria-hidden />
                     </span>
