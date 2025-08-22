@@ -472,28 +472,23 @@ export default function Step5({ userDetails }: Step5Props) {
 
         {/* desktop view */}
         <div
-          className="hidden md:flex md:mt-4 md:w-[95%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl mb-8"
+          className="hidden md:flex md:mt-4 md:w-[98%] mx-auto flex-1 relative overflow-hidden border border-[#FFFFFF1A] bg-[#FFFFFF0D] rounded-2xl mb-auto"
           style={{
             backgroundImage:
               "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
             backgroundPosition: "top right, bottom left",
             backgroundRepeat: "no-repeat, no-repeat",
-            backgroundSize: "auto, auto",
+            backgroundSize: "70%, 70%",
             maxHeight: "calc(100vh - 164px)",
             height: "calc(100vh - 164px)",
           }}
         >
-          <div className="relative w-[40%] h-full flex flex-col z-10 bg-transparent">
-            <div
-              className="w-full h-full flex flex-col items-center justify-between px-6 py-6"
-              style={{
-                minHeight: 0,
-              }}
-            >
+          <div className="w-[40%] flex flex-col z-10 bg-transparent px-8 overflow-y-auto">
+            <div className="w-full flex flex-col items-center justify-between px-6 py-6 mt-10">
               <div
                 style={{
-                  width: "min(140px,20vw)",
-                  height: "min(140px,20vw)",
+                  width: "min(180px,20vw)",
+                  height: "min(180px,20vw)",
                   minWidth: "80px",
                   minHeight: "80px",
                   maxWidth: "180px",
@@ -501,10 +496,9 @@ export default function Step5({ userDetails }: Step5Props) {
                   borderRadius: "50%",
                   border: "1px solid #FFFFFF80",
                   boxShadow:
-                    "2.5px 5px 13.5px 6px #A6D9F544, -2.1px -4.6px 13.4px 6px #6A685633",
+                    "4.74px 9.7px 26.69px 11.85px #A6D9F566, -4.37px -9.63px 26.48px 11.85px #6A685666",
                   overflow: "hidden",
                   background: "#181A20",
-                  marginBottom: "20px",
                 }}
               >
                 <img
@@ -518,14 +512,9 @@ export default function Step5({ userDetails }: Step5Props) {
                   }}
                 />
               </div>
-              <div className="w-full h-[1px] bg-[#FFFFFF33] mb-4" />
+              <div className="w-full h-[1px] bg-[#FFFFFF33] my-8" />
 
-              <div
-                className="w-full rounded-[20px] bg-[#FFFFFF12] border border-[#FFFFFF80] shadow-[3.2px_6.6px_20.11px_9.6px_#A6D9F544,_-2.9px_-6.5px_20px_9.6px_#6A685633] backdrop-blur-[12px] flex flex-col items-center px-4 py-6 overflow-y-auto"
-                style={{
-                  maxHeight: "calc(100% - 220px)",
-                }}
-              >
+              <div className="w-full mx-5 rounded-[20px] bg-[#FFFFFF12] border-[0.75px] border-[#FFFFFF80] shadow-[0px_3px_10px_5px_#A6D9F566,_0px_-3px_10px_5px_#6A6856] backdrop-blur-[12px] flex flex-col items-center px-4 py-6">
                 <h3 className="font-light text-lg tracking-[-0.04em] text-center capitalize text-white mb-2">
                   Your Future Glow-Up
                 </h3>
@@ -579,7 +568,7 @@ export default function Step5({ userDetails }: Step5Props) {
                 </h4>
                 <button
                   type="submit"
-                  className={`mb-3 mx-auto relative z-10 w-full h-10 rounded-full font-medium text-base flex items-center justify-center gap-2 shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)] border-[2px] border-[#FFFFFF66] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30`}
+                  className={`mb-3 mx-auto relative z-10 w-full h-12 rounded-full font-medium text-base flex items-center justify-center gap-2 shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)] border-[2px] border-[#FFFFFF66] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30`}
                   style={{
                     backdropFilter: "blur(24px)",
                     backgroundSize: "105% 105%",
@@ -594,13 +583,13 @@ export default function Step5({ userDetails }: Step5Props) {
                   Share your results
                 </button>
                 <div className="w-full flex gap-2 mb-2">
-                  <button className="flex-1 h-10 gap-2 rounded-[28px] px-3 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white font-light text-[13px] flex items-center justify-center">
+                  <button className="flex-1 h-12 gap-2 rounded-[28px] px-3 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white font-light text-[13px] flex items-center justify-center">
                     Copy link
                     <span aria-hidden className="flex">
                       <img src="/copy.svg" alt="" aria-hidden />
                     </span>
                   </button>
-                  <button className="w-10 h-10 rounded-[28px] px-2 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white flex items-center justify-center">
+                  <button className="w-20 h-12 rounded-[28px] px-2 py-2 bg-[#FFFFFF0D] border-[#FFFFFF1A] border text-white flex items-center justify-center">
                     <span aria-hidden className="flex">
                       <img src="/download.svg" alt="" aria-hidden />
                     </span>
@@ -610,7 +599,7 @@ export default function Step5({ userDetails }: Step5Props) {
             </div>
           </div>
 
-          <div className="w-[60%] px-8 mt-12 py-16 overflow-y-auto flex flex-col">
+          <div className="w-[60%] px-8 mt-8 py-16 overflow-y-auto flex flex-col">
             <div className="text-left mb-8">
               <h2 className="text-[28px] font-light text-white mb-3">
                 This Is Where You&#39;re Headed
@@ -947,6 +936,69 @@ export default function Step5({ userDetails }: Step5Props) {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        <div
+          className="hidden md:flex md:mt-4 md:w-[98%] mx-auto relative overflow-hidden border border-[#FFFFFF1A] bg-[#091216] rounded-2xl mb-auto"
+          style={{
+            maxHeight: "300px",
+            height: "300px",
+          }}
+        >
+          <div
+            className="absolute inset-y-0 left-1/3 w-2/3 bg-no-repeat bg-contain bg-center"
+            style={{ backgroundImage: "url('/product-desktop.svg')" }}
+          />
+
+          <div className="w-1/3 flex flex-col justify-center items-start px-10 relative z-10">
+            <h2 className="text-white text-2xl font-light mb-4">Meet the</h2>
+            <div className="flex items-center gap-3 mb-6">
+              <img src="/valour.svg" alt="Logo" className="w-[150px] h-auto" />
+              <span className="text-white text-4xl font-light">
+                WATCH 1 GPS
+              </span>
+            </div>
+            <button
+              type="submit"
+              className={`mb-3 relative z-10 px-20 h-12 rounded-full font-medium text-base flex items-center gap-2 shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)] border-[2px] border-[#FFFFFF66] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30`}
+              style={{
+                backdropFilter: "blur(24px)",
+                backgroundSize: "105% 105%",
+                backgroundPosition: "center",
+                backgroundRepeat: "repeat",
+                fontSize: "15px",
+              }}
+            >
+              Order Now
+            </button>
+          </div>
+
+          <div className="w-1/3 relative z-10"></div>
+
+          <div className="w-1/3 grid grid-cols-3 grid-rows-2 gap-8 place-items-center px-8 relative z-10">
+            {[
+              {
+                icon: "/calling.svg",
+                label: "Crystal Clear Bluetooth Calling",
+              },
+              { icon: "/watch.svg", label: "Dynamic Auto Change Watchfaces" },
+              { icon: "/navigation.svg", label: "Turn-by Turn Navigation" },
+              { icon: "/qr.svg", label: "QR Tray" },
+              { icon: "/moon.svg", label: "Advanced Sleep Insights" },
+              { icon: "/step.svg", label: "Step Count" },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center text-center">
+                <img
+                  src={item.icon}
+                  alt={item.label}
+                  className="w-8 h-8 mb-2"
+                />
+                <span className="text-white text-sm font-light">
+                  {item.label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
