@@ -484,9 +484,7 @@ export default function Step5({ userDetails }: Step5Props) {
           }}
         >
           <div className="w-[40%] flex flex-col z-10 bg-transparent px-8 overflow-y-auto">
-            <div
-              className="w-full flex flex-col items-center justify-between px-6 py-6 mt-10"
-            >
+            <div className="w-full flex flex-col items-center justify-between px-6 py-6 mt-10">
               <div
                 style={{
                   width: "min(180px,20vw)",
@@ -516,11 +514,7 @@ export default function Step5({ userDetails }: Step5Props) {
               </div>
               <div className="w-full h-[1px] bg-[#FFFFFF33] my-8" />
 
-           <div
-  className="w-full mx-5 rounded-[20px] bg-[#FFFFFF12] border-[0.75px] border-[#FFFFFF80] shadow-[0px_3px_10px_5px_#A6D9F566,_0px_-3px_10px_5px_#6A6856] backdrop-blur-[12px] flex flex-col items-center px-4 py-6"
->
-
-
+              <div className="w-full mx-5 rounded-[20px] bg-[#FFFFFF12] border-[0.75px] border-[#FFFFFF80] shadow-[0px_3px_10px_5px_#A6D9F566,_0px_-3px_10px_5px_#6A6856] backdrop-blur-[12px] flex flex-col items-center px-4 py-6">
                 <h3 className="font-light text-lg tracking-[-0.04em] text-center capitalize text-white mb-2">
                   Your Future Glow-Up
                 </h3>
@@ -942,6 +936,69 @@ export default function Step5({ userDetails }: Step5Props) {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        <div
+          className="hidden md:flex md:mt-4 md:w-[98%] mx-auto relative overflow-hidden border border-[#FFFFFF1A] bg-[#091216] rounded-2xl mb-auto"
+          style={{
+            maxHeight: "300px",
+            height: "300px",
+          }}
+        >
+          <div
+            className="absolute inset-y-0 left-1/3 w-2/3 bg-no-repeat bg-contain bg-center"
+            style={{ backgroundImage: "url('/product-desktop.svg')" }}
+          />
+
+          <div className="w-1/3 flex flex-col justify-center items-start px-10 relative z-10">
+            <h2 className="text-white text-2xl font-light mb-4">Meet the</h2>
+            <div className="flex items-center gap-3 mb-6">
+              <img src="/valour.svg" alt="Logo" className="w-[150px] h-auto" />
+              <span className="text-white text-4xl font-light">
+                WATCH 1 GPS
+              </span>
+            </div>
+            <button
+              type="submit"
+              className={`mb-3 relative z-10 px-20 h-12 rounded-full font-medium text-base flex items-center gap-2 shadow-[inset_0_4px_48px_0_rgba(126,186,238,0.22)] border-[2px] border-[#FFFFFF66] bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] text-[#151C2B] hover:from-[#FCF5DE] hover:to-[#90D6FB] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8ED0F3]/30`}
+              style={{
+                backdropFilter: "blur(24px)",
+                backgroundSize: "105% 105%",
+                backgroundPosition: "center",
+                backgroundRepeat: "repeat",
+                fontSize: "15px",
+              }}
+            >
+              Order Now
+            </button>
+          </div>
+
+          <div className="w-1/3 relative z-10"></div>
+
+          <div className="w-1/3 grid grid-cols-3 grid-rows-2 gap-8 place-items-center px-8 relative z-10">
+            {[
+              {
+                icon: "/calling.svg",
+                label: "Crystal Clear Bluetooth Calling",
+              },
+              { icon: "/watch.svg", label: "Dynamic Auto Change Watchfaces" },
+              { icon: "/navigation.svg", label: "Turn-by Turn Navigation" },
+              { icon: "/qr.svg", label: "QR Tray" },
+              { icon: "/moon.svg", label: "Advanced Sleep Insights" },
+              { icon: "/step.svg", label: "Step Count" },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center text-center">
+                <img
+                  src={item.icon}
+                  alt={item.label}
+                  className="w-8 h-8 mb-2"
+                />
+                <span className="text-white text-sm font-light">
+                  {item.label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
