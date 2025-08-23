@@ -7,10 +7,15 @@ import Footer from "./common/Footer";
 import UserImageCard from "./common/UserImageCard";
 import CtaButton from "./common/CtaButton";
 
-export default function Step4() {
+interface Step4Props {
+  isProcessing: boolean;
+  progress: number;
+  error: string | null;
+}
+
+export default function Step4({ isProcessing, progress, error }: Step4Props) {
   const [dots, setDots] = useState("");
   const [factIndex, setFactIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
 
   const facts = [
     "Your biological age can be younger than your real age — with the right habits.",
@@ -36,17 +41,16 @@ export default function Step4() {
   }, [facts.length]);
 
   useEffect(() => {
-    let currentProgress = 50; // Starting from 50% as per previous steps
-    const progressInterval = setInterval(() => {
-      if (currentProgress < 100) {
-        currentProgress += 5;
-        setProgress(currentProgress);
-      } else {
-        clearInterval(progressInterval);
-      }
-    }, 200); // Update every 200ms TODO: This is temporary
-    return () => clearInterval(progressInterval);
-  }, []);
+    if (error) {
+      // Stop animations if there's an error
+      return;
+    }
+    
+    if (!isProcessing) {
+      // Progress is managed by the parent component
+      return;
+    }
+  }, [isProcessing, error]);
 
   const handleStartOver = () => {
     window.location.reload();
@@ -167,14 +171,31 @@ export default function Step4() {
                   }}
                 />
                 <div className="relative flex flex-col items-center justify-center z-10 h-full">
-                  <img
-                    src="/sparkle.svg"
-                    alt="Sparkle"
-                    className="w-8 h-8 mb-2"
-                  />
-                  <div className="text-white text-lg">
-                    Preparing your future self{dots}
-                  </div>
+                  {error ? (
+                    <>
+                      <div className="text-red-400 text-lg mb-2">Error</div>
+                      <div className="text-white text-sm text-center px-4">
+                        {error}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        src="/sparkle.svg"
+                        alt="Sparkle"
+                        className="w-8 h-8 mb-2"
+                      />
+                      <div className="text-white text-lg">
+                        Preparing your future self{dots}
+                      </div>
+                      <div className="mt-4 w-32 h-2 bg-white/20 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] transition-all duration-300"
+                          style={{ width: `${progress}%` }}
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

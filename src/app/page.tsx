@@ -7,10 +7,13 @@ import Step2 from "@/components/Step2";
 import Step3 from "@/components/Step3";
 import Step4 from "@/components/Step4";
 import Step5 from "@/components/Step5";
+import { useTransformation } from "@/lib/hooks/useTransformation";
+import { UserData } from "@/lib/api";
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
   const [userName, setUserName] = useState("");
+  const [userPhoto, setUserPhoto] = useState<string>("");
   const [userDetails, setUserDetails] = useState({
     dateOfBirth: "",
     height: 178,
@@ -23,6 +26,16 @@ export default function Home() {
     calories: 2000,
   });
 
+  const { 
+    isProcessing, 
+    isComplete, 
+    error, 
+    result, 
+    progress, 
+    processTransformation, 
+    resetTransformation 
+  } = useTransformation();
+
   const nextStep = () => {
     if (currentStep < 5) setCurrentStep(currentStep + 1);
   };
@@ -33,6 +46,7 @@ export default function Home() {
   };
 
   const handlePhotoUpload = (photo: string) => {
+    setUserPhoto(photo);
     nextStep();
   };
 
@@ -41,9 +55,22 @@ export default function Home() {
     nextStep();
   };
 
-  const handleActivitySubmit = (activity: typeof dailyActivity) => {
+  const handleActivitySubmit = async (activity: typeof dailyActivity) => {
     setDailyActivity(activity);
     nextStep();
+    
+    // Prepare user data for API call
+    const userData: UserData = {
+      userName,
+      userPhoto,
+      userDetails,
+      dailyActivity: activity,
+    };
+
+    // Process transformation
+    await processTransformation(userData);
+    
+    // Move to results step after processing
     setTimeout(() => {
       nextStep();
     }, 3000);
@@ -81,12 +108,20 @@ export default function Home() {
           />
         );
       case 4:
-        return <Step4 />;
+        return (
+          <Step4 
+            isProcessing={isProcessing}
+            progress={progress}
+            error={error}
+          />
+        );
       case 5:
         return (
           <Step5
             userDetails={userDetails}
             dailyActivity={dailyActivity}
+            transformationResult={result}
+            userPhoto={userPhoto}
           />
         );
       default:

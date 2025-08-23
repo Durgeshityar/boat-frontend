@@ -6,6 +6,7 @@ import Header from "./common/Header";
 import Footer from "./common/Footer";
 import Stepper from "./common/Stepper";
 import CtaButton from "./common/CtaButton";
+import { TransformationResult } from "@/lib/api";
 
 interface Step5Props {
   userDetails: {
@@ -19,12 +20,18 @@ interface Step5Props {
     steps: number;
     calories: number;
   };
+  transformationResult: TransformationResult | null;
+  userPhoto: string;
 }
 
-export default function Step5({ userDetails }: Step5Props) {
+export default function Step5({ userDetails, transformationResult, userPhoto }: Step5Props) {
   const [selectedPeriod, setSelectedPeriod] = useState("1 year");
-  const userPhotoUrl =
-    "https://manofmany.com/wp-content/uploads/2022/02/Green-and-Gold-feature-400x300.jpg";
+  
+  // Use the actual user photo or fallback to a default
+  const userPhotoUrl = userPhoto || "https://manofmany.com/wp-content/uploads/2022/02/Green-and-Gold-feature-400x300.jpg";
+  
+  // Use transformation result data or fallback to calculated values
+  const resultData = transformationResult?.data;
   const calculateAge = () => {
     if (!userDetails.dateOfBirth) return 27;
     const today = new Date();
@@ -40,8 +47,8 @@ export default function Step5({ userDetails }: Step5Props) {
     return age;
   };
 
-  const currentAge = calculateAge();
-  const biologicalAge = Math.max(20, currentAge - 2);
+  const currentAge = resultData?.currentAge || calculateAge();
+  const biologicalAge = resultData?.biologicalAge || Math.max(20, currentAge - 2);
 
   const metrics = [
     {
@@ -49,40 +56,40 @@ export default function Step5({ userDetails }: Step5Props) {
       label: "Biological age",
       value: `${biologicalAge}`,
       unit: "years",
-      change: "-2 years",
+      change: resultData?.metrics?.energy?.change || "-2 years",
       current: `${currentAge} years`,
     },
     {
       icon: Zap,
       label: "Energy",
-      value: "83",
+      value: resultData?.metrics?.energy?.value?.toString() || "83",
       unit: "%",
-      change: "+18%",
-      current: "65%",
+      change: resultData?.metrics?.energy?.change || "+18%",
+      current: resultData?.metrics?.energy?.current || "65%",
     },
     {
       icon: Brain,
       label: "Focus",
-      value: "88",
+      value: resultData?.metrics?.focus?.value?.toString() || "88",
       unit: "%",
-      change: "+14%",
-      current: "74%",
+      change: resultData?.metrics?.focus?.change || "+14%",
+      current: resultData?.metrics?.focus?.current || "74%",
     },
     {
       icon: Heart,
       label: "Mood",
-      value: "91",
+      value: resultData?.metrics?.mood?.value?.toString() || "91",
       unit: "%",
-      change: "+19%",
-      current: "72%",
+      change: resultData?.metrics?.mood?.change || "+19%",
+      current: resultData?.metrics?.mood?.current || "72%",
     },
     {
       icon: Brain,
       label: "Stress",
-      value: "25",
+      value: resultData?.metrics?.stress?.value?.toString() || "25",
       unit: "%",
-      change: "-30%",
-      current: "55%",
+      change: resultData?.metrics?.stress?.change || "-30%",
+      current: resultData?.metrics?.stress?.current || "55%",
     },
   ];
 
@@ -385,7 +392,7 @@ export default function Step5({ userDetails }: Step5Props) {
             </h3>
             <div className="w-full max-w-[185px] aspect-square rounded-full mx-auto border border-[#FFFFFF80] shadow-[2.5px_5px_13.5px_6px_#A6D9F544,_-2.1px_-4.6px_13.4px_6px_#6A685633] overflow-hidden bg-[#181A20] mb-6">
               <img
-                src={userPhotoUrl}
+                src={resultData?.transformedImage || userPhotoUrl}
                 alt="Future self"
                 className="w-full h-full object-cover object-center"
               />
