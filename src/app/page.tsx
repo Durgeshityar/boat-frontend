@@ -33,7 +33,8 @@ export default function Home() {
     result, 
     progress, 
     processTransformation, 
-    resetTransformation 
+    resetTransformation,
+    acquireToken
   } = useTransformation();
 
   const nextStep = () => {
@@ -45,8 +46,18 @@ export default function Home() {
     nextStep();
   };
 
-  const handlePhotoUpload = (photo: string) => {
+  const handlePhotoUpload = async (photo: string) => {
     setUserPhoto(photo);
+    
+    // Acquire auth token when photo is uploaded
+    try {
+      await acquireToken();
+    } catch (error) {
+      console.error('Failed to acquire token:', error);
+      // Continue with the flow even if token acquisition fails
+      // The transformation process will handle token acquisition later
+    }
+    
     nextStep();
   };
 
@@ -77,13 +88,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-  if (currentStep === 4) {
-    const timer = setTimeout(() => {
-      nextStep();
-    }, 8000);
-    return () => clearTimeout(timer);
-  }
-}, [currentStep]);
+    if (currentStep === 4) {
+      const timer = setTimeout(() => {
+        nextStep();
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentStep]);
 
   const renderStep = () => {
     switch (currentStep) {
@@ -132,7 +143,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
       <div className="absolute inset-0 z-0 bg-[#020D11]" />
-<div className="absolute inset-0 z-10 pointer-events-none [background-size:20px_20px] [background-image:radial-gradient(rgba(212,212,212,0.08)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(64,64,64,0.10)_1px,transparent_1px)]" />
+      <div className="absolute inset-0 z-10 pointer-events-none [background-size:20px_20px] [background-image:radial-gradient(rgba(212,212,212,0.08)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(64,64,64,0.10)_1px,transparent_1px)]" />
       <div className="pointer-events-none absolute inset-0 z-20 bg-white/0 dark:bg-black/0 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       <div className="relative z-20">{renderStep()}</div>
     </div>
