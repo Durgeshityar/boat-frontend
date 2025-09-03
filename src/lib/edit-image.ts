@@ -56,10 +56,13 @@ export const editImage = async (
   if (payload.bodyFatPct !== undefined)
     formData.append('bodyFatPct', payload.bodyFatPct.toString())
 
-  const res = await fetch(`${process.env.BACKEND_URL}/api/image/edit`, {
-    method: 'POST',
-    body: formData,
-  })
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}api/image/edit`,
+    {
+      method: 'POST',
+      body: formData,
+    }
+  )
 
   if (!res.ok) {
     const text = await res.text()
