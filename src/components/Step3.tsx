@@ -1,68 +1,61 @@
-"use client";
+/* eslint-disable @next/next/no-img-element */
+'use client'
 
-import { useState } from "react";
-import CtaButton from "@/components/common/CtaButton";
-import Header from "./common/Header";
-import Stepper from "./common/Stepper";
-import Footer from "./common/Footer";
-import ProfileBadge from "./common/ProfileBadge";
-import { SliderCard } from "./common/SliderCard";
-import UserImageCard from "./common/UserImageCard";
+import { useState } from 'react'
+import CtaButton from '@/components/common/CtaButton'
+import Header from './common/Header'
+import Stepper from './common/Stepper'
+import Footer from './common/Footer'
+import ProfileBadge from './common/ProfileBadge'
+import { SliderCard } from './common/SliderCard'
+import UserImageCard from './common/UserImageCard'
+import { useHealthStore } from '@/store/useHealthStore'
 
-interface Step3Props {
-  userName: string;
-  dailyActivity: {
-    sleep: number;
-    water: number;
-    steps: number;
-    calories: number;
-  };
-  onSubmit: (activity: {
-    sleep: number;
-    water: number;
-    steps: number;
-    calories: number;
-  }) => void;
-}
+export default function Step3() {
+  const { inputs, setInput, nextStep, processingImageUrl } = useHealthStore()
 
-export default function Step3({
-  userName,
-  dailyActivity,
-  onSubmit,
-}: Step3Props) {
-  const [activity, setActivity] = useState(dailyActivity);
-  const [showValidation, setShowValidation] = useState(false);
+  const [activity, setActivity] = useState({
+    sleep: inputs.sleepHours || 7,
+    water: inputs.waterMl || 2000,
+    steps: inputs.steps || 10,
+    calories: inputs.calories || 2000,
+  })
+  const [showValidation, setShowValidation] = useState(false)
   const [errors, setErrors] = useState<{
-    sleep?: boolean;
-    water?: boolean;
-    steps?: boolean;
-    calories?: boolean;
-  }>({});
-  const userPhotoUrl =
-    "https://manofmany.com/wp-content/uploads/2022/02/Green-and-Gold-feature-400x300.jpg";
+    sleep?: boolean
+    water?: boolean
+    steps?: boolean
+    calories?: boolean
+  }>({})
+  const userPhotoUrl = processingImageUrl
 
   const validate = () => {
-    const e: typeof errors = {};
-    if (activity.sleep < 2 || activity.sleep > 10) e.sleep = true;
-    if (activity.water < 250 || activity.water > 3000) e.water = true;
-    if (activity.steps < 1 || activity.steps > 20) e.steps = true;
-    if (activity.calories < 1000 || activity.calories > 3500) e.calories = true;
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
+    const e: typeof errors = {}
+    if (activity.sleep < 2 || activity.sleep > 10) e.sleep = true
+    if (activity.water < 250 || activity.water > 3000) e.water = true
+    if (activity.steps < 1 || activity.steps > 20) e.steps = true
+    if (activity.calories < 1000 || activity.calories > 3500) e.calories = true
+    setErrors(e)
+    return Object.keys(e).length === 0
+  }
 
   const handleSubmit = () => {
     if (validate()) {
-      setShowValidation(false);
-      onSubmit(activity);
+      setShowValidation(false)
+      // Update the store with the activity data
+      setInput('sleepHours', activity.sleep)
+      setInput('waterMl', activity.water)
+      setInput('steps', activity.steps * 1000)
+      setInput('calories', activity.calories)
+      nextStep()
     } else {
-      setShowValidation(true);
+      setShowValidation(true)
     }
-  };
+  }
 
   const handleStartOver = () => {
-    window.location.reload();
-  };
+    window.location.reload()
+  }
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col">
@@ -71,16 +64,16 @@ export default function Step3({
         className="absolute inset-0 z-10 pointer-events-none [background-size:20px_20px]"
         style={{
           backgroundImage:
-            "radial-gradient(rgba(212,212,212,0.08) 1px, transparent 1px)",
+            'radial-gradient(rgba(212,212,212,0.08) 1px, transparent 1px)',
         }}
       />
       <div
         className="pointer-events-none absolute inset-0 z-20 bg-white/0 dark:bg-black/0"
         style={{
           maskImage:
-            "radial-gradient(ellipse at center, transparent 20%, black)",
+            'radial-gradient(ellipse at center, transparent 20%, black)',
           WebkitMaskImage:
-            "radial-gradient(ellipse at center, transparent 20%, black)",
+            'radial-gradient(ellipse at center, transparent 20%, black)',
         }}
       />
 
@@ -91,7 +84,7 @@ export default function Step3({
         aria-hidden="true"
         className="absolute left-0 pointer-events-none select-none w-[100vw] md:hidden"
         style={{
-          top: "50px",
+          top: '50px',
         }}
       />
       <img
@@ -100,7 +93,7 @@ export default function Step3({
         aria-hidden="true"
         className="absolute left-0 pointer-events-none select-none w-full md:hidden"
         style={{
-          top: "350px",
+          top: '350px',
         }}
       />
       <img
@@ -109,8 +102,8 @@ export default function Step3({
         aria-hidden="true"
         className="absolute left-0 pointer-events-none select-none w-[100vw] md:hidden"
         style={{
-          bottom: "0",
-          right: "0",
+          bottom: '0',
+          right: '0',
         }}
       />
 
@@ -121,8 +114,8 @@ export default function Step3({
             <CtaButton
               onClick={handleStartOver}
               style={{
-                width: "160px",
-                height: "48px",
+                width: '160px',
+                height: '48px',
               }}
             >
               Start Over
@@ -143,7 +136,7 @@ export default function Step3({
               <h2 className="text-2xl font-light text-white text-left">
                 How You Move, Fuel
                 <br />
-                &amp; Feel, {userName}?
+                &amp; Feel, {inputs.name || 'Friend'}?
               </h2>
             </div>
             <p className="text-white/60 text-center text-base font-light">
@@ -155,7 +148,7 @@ export default function Step3({
 
           <div
             className="w-full h-px"
-            style={{ backgroundColor: "#FFFFFF33" }}
+            style={{ backgroundColor: '#FFFFFF33' }}
             aria-hidden="true"
           />
 
@@ -187,18 +180,18 @@ export default function Step3({
             >
               <div className="flex justify-center gap-3">
                 {Array.from({ length: 12 }).map((_, index) => {
-                  const filled = activity.water >= (index + 1) * 250;
-                  const src = filled ? "/filled-glass.svg" : "/empty-glass.svg";
+                  const filled = activity.water >= (index + 1) * 250
+                  const src = filled ? '/filled-glass.svg' : '/empty-glass.svg'
                   return (
                     <img
                       key={index}
                       src={src}
-                      alt={filled ? "Filled glass" : "Empty glass"}
+                      alt={filled ? 'Filled glass' : 'Empty glass'}
                       width={15}
                       height={20}
                       className="transition-all"
                     />
-                  );
+                  )
                 })}
               </div>
             </SliderCard>
@@ -250,15 +243,15 @@ export default function Step3({
           style={{
             backgroundImage:
               "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
-            backgroundPosition: "top right, bottom left",
-            backgroundRepeat: "no-repeat, no-repeat",
-            backgroundSize: "auto, auto",
+            backgroundPosition: 'top right, bottom left',
+            backgroundRepeat: 'no-repeat, no-repeat',
+            backgroundSize: 'auto, auto',
           }}
         >
           <div className="w-1/2 p-12 flex flex-col justify-start z-10">
             <div className="mb-10">
               <h2 className="text-3xl font-light text-white mb-3 mt-10">
-                How You Move, Fuel &amp; Feel, {userName}?
+                How You Move, Fuel &amp; Feel, {inputs.name || 'Friend'}?
               </h2>
               <p className="text-white/60 text-base font-light">
                 These daily choices shape your tomorrow - let&#39;s map them
@@ -268,7 +261,7 @@ export default function Step3({
 
             <div
               className="h-px mb-8 w-full"
-              style={{ backgroundColor: "#FFFFFF33" }}
+              style={{ backgroundColor: '#FFFFFF33' }}
             />
 
             <div className="flex flex-col gap-4 items-center">
@@ -299,20 +292,20 @@ export default function Step3({
               >
                 <div className="flex justify-center gap-3">
                   {Array.from({ length: 12 }).map((_, index) => {
-                    const filled = activity.water >= (index + 1) * 250;
+                    const filled = activity.water >= (index + 1) * 250
                     const src = filled
-                      ? "/filled-glass.svg"
-                      : "/empty-glass.svg";
+                      ? '/filled-glass.svg'
+                      : '/empty-glass.svg'
                     return (
                       <img
                         key={index}
                         src={src}
-                        alt={filled ? "Filled glass" : "Empty glass"}
+                        alt={filled ? 'Filled glass' : 'Empty glass'}
                         width={15}
                         height={20}
                         className="transition-all"
                       />
-                    );
+                    )
                   })}
                 </div>
               </SliderCard>
@@ -356,7 +349,7 @@ export default function Step3({
 
               <CtaButton
                 onClick={handleSubmit}
-                style={{ width: "fit-content", padding: "12px 24px" }}
+                style={{ width: 'fit-content', padding: '12px 24px' }}
               >
                 See Your Future Self
               </CtaButton>
@@ -371,5 +364,5 @@ export default function Step3({
         <Footer />
       </div>
     </div>
-  );
+  )
 }

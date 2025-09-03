@@ -1,60 +1,138 @@
-"use client";
+/* eslint-disable @next/next/no-img-element */
+'use client'
 
-import { useEffect, useState } from "react";
-import Stepper from "./common/Stepper";
-import Header from "./common/Header";
-import Footer from "./common/Footer";
-import UserImageCard from "./common/UserImageCard";
-import CtaButton from "./common/CtaButton";
+import { useEffect, useState } from 'react'
+import Stepper from './common/Stepper'
+import Header from './common/Header'
+import Footer from './common/Footer'
+import UserImageCard from './common/UserImageCard'
+import CtaButton from './common/CtaButton'
+import ErrorModal from './common/ErrorModal'
+import { useHealthStore } from '@/store/useHealthStore'
+import { editImage } from '@/lib/edit-image'
 
-interface Step4Props {
-  isProcessing: boolean;
-  progress: number;
-  error: string | null;
-}
+export default function Step4() {
+  const { processingImageUrl, inputs, setResults, nextStep } = useHealthStore()
 
-export default function Step4({ isProcessing, progress, error }: Step4Props) {
-  const [dots, setDots] = useState("");
-  const [factIndex, setFactIndex] = useState(0);
+  const [error, setError] = useState<string | null>(null)
+  const [progress, setProgress] = useState(0)
+  const [isProcessing, setIsProcessing] = useState(true)
+  const [showErrorModal, setShowErrorModal] = useState(false)
+  const [canRetry, setCanRetry] = useState(false)
+
+  const processImage = async () => {
+    setError(null)
+    setIsProcessing(true)
+    setCanRetry(false)
+    setProgress(0)
+    setShowErrorModal(false)
+
+    let tick: NodeJS.Timeout | null = null
+
+    try {
+      // Start progress animation
+      tick = setInterval(() => {
+        setProgress((p) => (p < 90 ? p + 5 : p))
+      }, 300)
+
+      const res = await editImage({
+        image: inputs.imageFile!,
+        dob: inputs.dob,
+        height: inputs.height,
+        weight: inputs.weight,
+        sleepHours: inputs.sleepHours,
+        waterMl: inputs.waterMl,
+        steps: inputs.steps,
+        calories: inputs.calories,
+        gender: inputs.gender,
+        goal: inputs.goal,
+        bodyFatPct: inputs.bodyFatPct,
+      })
+
+      setResults(res)
+      setProgress(100)
+
+      if (res.success) {
+        setIsProcessing(false)
+        setTimeout(() => nextStep(), 1000) // Small delay to show completion
+      } else {
+        throw new Error(res.message || 'Processing failed. Please try again.')
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
+      setIsProcessing(false)
+      setProgress(0)
+
+      // Better error message handling
+      let errorMessage = 'Something went wrong. Please try again.'
+      let allowRetry = true
+
+      if (
+        e.message.includes('Failed to fetch') ||
+        e.message.includes('NetworkError')
+      ) {
+        errorMessage =
+          'Network connection error. Please check your internet connection and try again.'
+      } else if (e.message.includes('one request from a device')) {
+        errorMessage =
+          'You can only send one request from this device. Please refresh the page to start over.'
+        allowRetry = false
+      } else if (e.message.includes('timeout')) {
+        errorMessage =
+          'Request timed out. This might be due to a slow connection. Please try again.'
+      } else if (e.message) {
+        errorMessage = e.message
+      }
+
+      setError(errorMessage)
+      setCanRetry(allowRetry)
+      setShowErrorModal(true)
+    } finally {
+      if (tick) clearInterval(tick)
+    }
+  }
+
+  useEffect(() => {
+    processImage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleRetry = () => {
+    processImage()
+  }
+
+  const handleBackToHome = () => {
+    window.location.href = '/'
+  }
+
+  const handleStartOver = () => {
+    window.location.reload()
+  }
+
+  const [dots, setDots] = useState('')
+  const [factIndex, setFactIndex] = useState(0)
 
   const facts = [
-    "Your biological age can be younger than your real age — with the right habits.",
-    "Sleep quality directly impacts how quickly your cells age.",
-    "Staying hydrated improves skin elasticity and slows aging.",
-  ];
+    'Your biological age can be younger than your real age — with the right habits.',
+    'Sleep quality directly impacts how quickly your cells age.',
+    'Staying hydrated improves skin elasticity and slows aging.',
+  ]
 
-  const userPhotoUrl =
-    "https://manofmany.com/wp-content/uploads/2022/02/Green-and-Gold-feature-400x300.jpg";
+  const userPhotoUrl = processingImageUrl
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDots((prev) => (prev.length >= 3 ? "" : prev + "."));
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
+      setDots((prev) => (prev.length >= 3 ? '' : prev + '.'))
+    }, 500)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     const factInterval = setInterval(() => {
-      setFactIndex((prev) => (prev + 1) % facts.length);
-    }, 4000);
-    return () => clearInterval(factInterval);
-  }, [facts.length]);
-
-  useEffect(() => {
-    if (error) {
-      // Stop animations if there's an error
-      return;
-    }
-    
-    if (!isProcessing) {
-      // Progress is managed by the parent component
-      return;
-    }
-  }, [isProcessing, error]);
-
-  const handleStartOver = () => {
-    window.location.reload();
-  };
+      setFactIndex((prev) => (prev + 1) % facts.length)
+    }, 4000)
+    return () => clearInterval(factInterval)
+  }, [facts.length])
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col">
@@ -63,16 +141,16 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
         className="absolute inset-0 z-10 pointer-events-none [background-size:20px_20px]"
         style={{
           backgroundImage:
-            "radial-gradient(rgba(212,212,212,0.08) 1px, transparent 1px)",
+            'radial-gradient(rgba(212,212,212,0.08) 1px, transparent 1px)',
         }}
       />
       <div
         className="pointer-events-none absolute inset-0 z-20 bg-white/0 dark:bg-black/0"
         style={{
           maskImage:
-            "radial-gradient(ellipse at center, transparent 20%, black)",
+            'radial-gradient(ellipse at center, transparent 20%, black)',
           WebkitMaskImage:
-            "radial-gradient(ellipse at center, transparent 20%, black)",
+            'radial-gradient(ellipse at center, transparent 20%, black)',
         }}
       />
       <img
@@ -81,7 +159,7 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
         aria-hidden="true"
         className="pointer-events-none select-none absolute z-10 w-[100vw] md:hidden"
         style={{
-          top: "50px",
+          top: '50px',
         }}
       />
       <img
@@ -90,7 +168,7 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
         aria-hidden="true"
         className="pointer-events-none select-none absolute z-10 w-[100vw] md:hidden"
         style={{
-          top: "200px",
+          top: '200px',
         }}
       />
       <img
@@ -99,8 +177,8 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
         aria-hidden="true"
         className="pointer-events-none select-none absolute z-10 w-[100vw] md:hidden"
         style={{
-          top: "582.33px",
-          right: "0",
+          top: '582.33px',
+          right: '0',
         }}
       />
 
@@ -111,8 +189,8 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
             <CtaButton
               onClick={handleStartOver}
               style={{
-                width: "160px",
-                height: "48px",
+                width: '160px',
+                height: '48px',
               }}
             >
               Start Over
@@ -126,18 +204,18 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
           <div className="mb-8 w-full">
             <div
               className="w-full h-px mb-8"
-              style={{ backgroundColor: "#FFFFFF33" }}
+              style={{ backgroundColor: '#FFFFFF33' }}
               aria-hidden="true"
             />
 
             <div
               className="my-8 bg-[#FFFFFF0D] rounded-3xl backdrop-blur-lg relative mx-auto"
               style={{
-                border: "1px solid rgba(255, 255, 255, 0.5)",
+                border: '1px solid rgba(255, 255, 255, 0.5)',
                 boxShadow: `-11px -17px 58.3px 20px #6A6856, 8px 20px 72.3px 20px rgba(166, 217, 245, 0.4)`,
-                width: "90%",
+                width: '90%',
                 maxWidth: 350,
-                aspectRatio: "7 / 9",
+                aspectRatio: '7 / 9',
               }}
             >
               <img
@@ -145,9 +223,9 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
                 alt="Background 1"
                 className="absolute top-0 right-0 pointer-events-none"
                 style={{
-                  width: "100%",
+                  width: '100%',
                   zIndex: 100,
-                  borderRadius: "0 20px 0 0",
+                  borderRadius: '0 20px 0 0',
                 }}
               />
               <img
@@ -155,9 +233,9 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
                 alt="Background 2"
                 className="absolute bottom-0 left-0 pointer-events-none"
                 style={{
-                  width: "100%",
+                  width: '100%',
                   zIndex: 100,
-                  borderRadius: "0px 0px 0px 20px",
+                  borderRadius: '0px 0px 0px 20px',
                 }}
               />
 
@@ -167,15 +245,16 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
                   alt="User profile"
                   className="absolute top-0 left-0 w-full h-full object-cover opacity-20"
                   style={{
-                    filter: "blur(20px)",
+                    filter: 'blur(20px)',
                   }}
                 />
                 <div className="relative flex flex-col items-center justify-center z-10 h-full">
-                  {error ? (
+                  {!isProcessing && progress === 100 ? (
                     <>
-                      <div className="text-red-400 text-lg mb-2">Error</div>
-                      <div className="text-white text-sm text-center px-4">
-                        {error}
+                      <div className="text-green-400 text-lg mb-2">✓</div>
+                      <div className="text-white text-lg">Complete!</div>
+                      <div className="text-green-400 text-sm mt-2">
+                        Processing complete
                       </div>
                     </>
                   ) : (
@@ -189,7 +268,7 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
                         Preparing your future self{dots}
                       </div>
                       <div className="mt-4 w-32 h-2 bg-white/20 rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-gradient-to-r from-[#FFE999] to-[#8ED0F3] transition-all duration-300"
                           style={{ width: `${progress}%` }}
                         />
@@ -201,17 +280,17 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
             </div>
 
             <div
-              style={{ backdropFilter: "blur(60px)" }}
+              style={{ backdropFilter: 'blur(60px)' }}
               className="mt-8 bg-[#020D11B2] border border-[#FFFFFF14] rounded-2xl p-6"
             >
               <div className="flex justify-between items-center">
                 <div
                   style={{
                     background:
-                      "linear-gradient(90deg, #FFE999 0%, #8ED0F3 100%)",
-                    borderRadius: "10px",
-                    width: "4px",
-                    height: "100px",
+                      'linear-gradient(90deg, #FFE999 0%, #8ED0F3 100%)',
+                    borderRadius: '10px',
+                    width: '4px',
+                    height: '100px',
                   }}
                 />
                 <div className="flex-1 px-4">
@@ -227,7 +306,7 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
                       className={`w-1.5 h-1.5 rounded-full mb-2 last:mb-0 transition-all`}
                       style={{
                         backgroundColor:
-                          i === factIndex ? "#FFFFFF" : "#FFFFFF1A",
+                          i === factIndex ? '#FFFFFF' : '#FFFFFF1A',
                       }}
                     />
                   ))}
@@ -243,9 +322,9 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
           style={{
             backgroundImage:
               "url('/step1-bg-1-desktop.svg'), url('/step1-bg-2-desktop.svg')",
-            backgroundPosition: "top right, bottom left",
-            backgroundRepeat: "no-repeat, no-repeat",
-            backgroundSize: "auto, auto",
+            backgroundPosition: 'top right, bottom left',
+            backgroundRepeat: 'no-repeat, no-repeat',
+            backgroundSize: 'auto, auto',
           }}
         >
           <main className="hidden md:flex flex-1 flex-col items-center justify-start px-4 max-w-2xl mx-auto w-full mb-16">
@@ -258,17 +337,17 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
             </div>
 
             <div
-              style={{ backdropFilter: "blur(60px)" }}
+              style={{ backdropFilter: 'blur(60px)' }}
               className="bg-[#020D11B2] border border-[#FFFFFF14] rounded-2xl p-6 w-full min-w-[700px] max-h-[100px]"
             >
               <div className="flex justify-between items-center">
                 <div
                   style={{
                     background:
-                      "linear-gradient(90deg, #FFE999 0%, #8ED0F3 100%)",
-                    borderRadius: "10px",
-                    width: "4px",
-                    height: "-webkit-fill-available",
+                      'linear-gradient(90deg, #FFE999 0%, #8ED0F3 100%)',
+                    borderRadius: '10px',
+                    width: '4px',
+                    height: '-webkit-fill-available',
                   }}
                 />
                 <div className="flex-1 px-4">
@@ -286,7 +365,7 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
                       className={`w-1.5 h-1.5 rounded-full mb-2 last:mb-0 transition-all`}
                       style={{
                         backgroundColor:
-                          i === factIndex ? "#FFFFFF" : "#FFFFFF1A",
+                          i === factIndex ? '#FFFFFF' : '#FFFFFF1A',
                       }}
                     />
                   ))}
@@ -297,6 +376,18 @@ export default function Step4({ isProcessing, progress, error }: Step4Props) {
         </div>
         <Footer />
       </div>
+
+      {/* Error Modal */}
+      <ErrorModal
+        isOpen={showErrorModal}
+        onClose={() => setShowErrorModal(false)}
+        title="Processing Failed"
+        message={error || 'Something went wrong. Please try again.'}
+        onTryAgain={canRetry ? handleRetry : undefined}
+        onBackToHome={handleBackToHome}
+        showTryAgain={canRetry}
+        showBackToHome={true}
+      />
     </div>
-  );
+  )
 }

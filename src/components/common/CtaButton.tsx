@@ -1,25 +1,26 @@
-"use client";
+/* eslint-disable @next/next/no-img-element */
+'use client'
 
-import React from "react";
+import React from 'react'
 
 interface CtaButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function CtaButton({
   children,
-  className = "",
+  className = '',
   style = {},
   ...props
 }: CtaButtonProps) {
   const internalStyle: React.CSSProperties = {
-    backdropFilter: "blur(36px)",
-    backgroundSize: "105% 105%",
-    backgroundPosition: "center",
-    backgroundRepeat: "repeat",
-  };
+    backdropFilter: 'blur(36px)',
+    backgroundSize: '105% 105%',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'repeat',
+  }
 
-  const mergedStyle = { ...internalStyle, ...style };
+  const mergedStyle = { ...internalStyle, ...style }
 
   return (
     <button
@@ -43,5 +44,5 @@ export default function CtaButton({
         <img src="/arrow-right.svg" alt="" aria-hidden />
       </span>
     </button>
-  );
+  )
 }

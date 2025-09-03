@@ -1,16 +1,17 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import React from 'react'
 import {
   CircularProgressbarWithChildren,
   buildStyles,
-} from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+} from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 
 interface ProfileBadgeProps {
-  photoUrl?: string | null;
-  step?: 2 | 3;
-  size?: number;
-  showSparkle?: boolean;
-  fallbackLetter?: string;
+  photoUrl?: string | null
+  step?: 2 | 3
+  size?: number
+  showSparkle?: boolean
+  fallbackLetter?: string
 }
 
 export default function ProfileBadge({
@@ -22,14 +23,14 @@ export default function ProfileBadge({
 }: ProfileBadgeProps) {
   const validPhoto =
     photoUrl &&
-    typeof photoUrl === "string" &&
-    photoUrl.trim() !== "" &&
-    !photoUrl.startsWith("blob:null") &&
-    !photoUrl.startsWith("undefined");
+    typeof photoUrl === 'string' &&
+    photoUrl.trim() !== '' &&
+    !photoUrl.startsWith('blob:null') &&
+    !photoUrl.startsWith('undefined')
 
-  const percentage = step === 2 ? 25 : step === 3 ? 50 : 0;
+  const percentage = step === 2 ? 25 : step === 3 ? 50 : 0
 
-  const imageSize = size * 0.75;
+  const imageSize = size * 0.75
 
   return (
     <div
@@ -43,32 +44,32 @@ export default function ProfileBadge({
         value={percentage}
         strokeWidth={2}
         styles={buildStyles({
-          trailColor: "#FFFFFF1A",
-          pathColor: "#ffffff",
+          trailColor: '#FFFFFF1A',
+          pathColor: '#ffffff',
         })}
       >
-          {showSparkle && (
-        <div
-          className="absolute z-10"
-          style={{
-            height: size * 0.4,
-            pointerEvents: "none",
-            userSelect: "none",
-          }}
-        >
-          <img
-            src="/sparkle.svg"
-            alt="sparkle"
-            className="w-full h-full"
-            draggable={false}
-          />
-        </div>
-      )}
+        {showSparkle && (
+          <div
+            className="absolute z-10"
+            style={{
+              height: size * 0.4,
+              pointerEvents: 'none',
+              userSelect: 'none',
+            }}
+          >
+            <img
+              src="/sparkle.svg"
+              alt="sparkle"
+              className="w-full h-full"
+              draggable={false}
+            />
+          </div>
+        )}
 
         <div
           className="overflow-hidden rounded-full flex items-center justify-center bg-black/50"
           style={{
-            filter: validPhoto ? "blur(4px)" : "none",
+            filter: validPhoto ? 'blur(4px)' : 'none',
           }}
         >
           {validPhoto ? (
@@ -77,7 +78,7 @@ export default function ProfileBadge({
               alt="profile"
               className="w-full h-full object-cover"
               draggable={false}
-              style={{ userSelect: "none" }}
+              style={{ userSelect: 'none' }}
             />
           ) : (
             <span
@@ -86,13 +87,11 @@ export default function ProfileBadge({
                 fontSize: imageSize * 0.35,
               }}
             >
-              {fallbackLetter?.[0] || "?"}
+              {fallbackLetter?.[0] || '?'}
             </span>
           )}
         </div>
       </CircularProgressbarWithChildren>
-
-    
     </div>
-  );
+  )
 }

@@ -1,8 +1,9 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import React from 'react'
 
 interface HeaderProps {
-  ctaButton?: React.ReactNode;
-  centerElement?: React.ReactNode;
+  ctaButton?: React.ReactNode
+  centerElement?: React.ReactNode
 }
 
 export default function Header({ ctaButton, centerElement }: HeaderProps) {
@@ -16,12 +17,12 @@ export default function Header({ ctaButton, centerElement }: HeaderProps) {
           h-[70px] w-full
           md:hidden
         "
-        style={{ padding: "20px 0" }}
+        style={{ padding: '20px 0' }}
       >
         <img
           src="/logo.svg"
           alt="Logo"
-          style={{ height: 22, width: "auto", display: "block" }}
+          style={{ height: 22, width: 'auto', display: 'block' }}
         />
       </div>
 
@@ -33,14 +34,14 @@ export default function Header({ ctaButton, centerElement }: HeaderProps) {
           bg-transparent pt-[20px]
         "
         style={{
-          justifyContent: centerElement ? "space-between" : "flex-between",
+          justifyContent: centerElement ? 'space-between' : 'flex-between',
         }}
       >
         <div className="flex items-center flex-shrink-0">
           <img
             src="/logo.svg"
             alt="Logo"
-            style={{ height: 26, width: "auto", display: "block" }}
+            style={{ height: 26, width: 'auto', display: 'block' }}
           />
         </div>
 
@@ -52,10 +53,8 @@ export default function Header({ ctaButton, centerElement }: HeaderProps) {
           <div className="flex-1" />
         )}
 
-        <div className="flex items-center flex-shrink-0">
-          {ctaButton}
-        </div>
+        <div className="flex items-center flex-shrink-0">{ctaButton}</div>
       </div>
     </header>
-  );
+  )
 }
